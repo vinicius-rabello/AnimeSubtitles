@@ -15,19 +15,6 @@ from utils.helpers import (
 )
 
 
-def write_to_csv(links: List[str], titles: List[str],
-                 sizes: List[float], file_name="data", sep=";,") -> None:
-    if "." in file_name:
-        file_name.split(".")[0]
-    logger.info("Writing data to csv file...")
-    with open(f"{file_name}.csv", "w+", encoding="utf-8") as f:
-        f.write(f"link{sep} title{sep} count\n")
-        for b, t, s in zip(links, titles, sizes):
-            f.write(b + sep + t + sep + str(s) + "\n")
-    logger.info("Done!")
-    return
-
-
 def routine(page: int = 1, limit_per_page: int = 1):
     data = {}
     animes = get_animes_finished_from_page(page=page)
@@ -78,5 +65,5 @@ page_count = 1
 page_limit = 1  # amount of entries to get from each page (put 9999 to get all)
 for page in range(1, page_count + 1):
     data = routine(page=page, limit_per_page=page_limit)
-    with open(f"examples_{page}/test.json", "w+", encoding="utf-8") as f:
+    with open(f"examples/test_{page}.json", "w+", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
