@@ -82,7 +82,7 @@ def filter_links_from_provider(
 
 def clean_title_string(
     title: str, quality: str, sequence: str, batch_provider: str
-) -> str:
+        ) -> str:
     # base cleaning
     title = title.replace(quality, "").replace(sequence, "")
 

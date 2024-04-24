@@ -62,7 +62,7 @@ def routine(page: int = 1, limit_per_page: int = 1):
 
 # low limit for testing
 page_count = 1
-page_limit = 1  # amount of entries to get from each page (put 9999 to get all)
+page_limit = 3 # amount of entries to get from each page (put 9999 to get all)
 for page in range(1, page_count + 1):
     data = routine(page=page, limit_per_page=page_limit)
     with open(f"examples/test_{page}.json", "w+", encoding="utf-8") as f:
