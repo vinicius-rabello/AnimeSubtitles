@@ -1,5 +1,9 @@
+import ass
+import lzma
 import re
-from typing import Dict, List, Tuple
+import os
+import pandas as pd
+from typing import Dict, Literal, List, Tuple
 # from ass.line import Dialogue
 from bs4.element import Tag
 from base_logger import logger
@@ -122,3 +126,116 @@ def clean_ass_text(line: str) -> str:
     line = line.replace("{bg}", "")
 
     return line
+
+
+def create_folders_for_anime(
+        anime_name: str, logs: Literal["minimal", "debug"] = "minimal") -> str:
+    logger.info("Creating folders...")
+    # check if data folder already exists
+    if not os.path.exists('data'):
+        try:
+            os.mkdir('data')
+            logger.info('General data folder created!')
+        except Exception:
+            logger.error('Error while creating general data folder.')
+    else:
+        logger.info('General data folder already exists!')
+
+    anime = anime_name.replace(' ', '_')
+    path = f'data/{anime}'
+    # check if folder for specific anime already exists
+    if not os.path.exists(path):
+        try:
+            os.mkdir(path)
+            os.mkdir(path + '/raw')
+            os.mkdir(path + '/processed')
+            if logs == "debug":
+                logger.info(f"Folder {path} created!")
+        except Exception:
+            logger.error(f'Error creating folder for {anime}')
+    else:
+        logger.info(f'Folder for anime {anime} already exists!')
+    logger.info(f"Finished creating folders for anime {anime_name}.")
+
+    return anime_name
+
+
+def generate_ass_files(filter_anime: str = "") -> List[str]:
+    created = []
+    filter_anime = filter_anime.replace(" ", "")
+    animes = os.listdir('data')
+    for anime in animes:
+        # for testing purposes
+        if filter_anime and anime.lower() != filter_anime.lower():
+            continue
+
+        logger.info(f'Generating .ass files for anime: {anime}')
+        folder_path = 'data/' + anime + '/raw'
+        episodes = os.listdir(folder_path)
+        success = 0
+        fails = 0
+
+        for idx, episode in enumerate(episodes):
+            path = folder_path + '/' + episode
+            # read .xz file
+            try:
+                with lzma.open(path, mode='rb') as file:
+                    content = file.read()
+
+                # removing .xz
+                path = path[:-3]
+                # we want to save .ass files into processed folder, not raw
+                path = path.replace('raw', 'processed')
+
+                with open(path + '.ass', 'wb') as file:  # write content into .ass file
+                    file.write(content)
+                    success += 1
+            except Exception:
+                continue
+            # just to know that script is running
+            if ((idx + 1) % 10) == 0 or (idx + 1) == len(episodes):
+                logger.info(f"[Progress|Total]: [{idx+1}|{len(episodes)}]")
+
+        if success > 0:
+            created.append(anime)
+            logger.info(
+                f'Successfully created {success} .ass files for anime {anime}!')
+        if fails > 0:
+            logger.warning(
+                f"Failed to create {fails} .ass files for anime {anime}.")
+    return created
+
+
+def build_df_from_ass_files(
+    anime_name: str = "", logs: Literal["minimal", "debug"] = "minimal") \
+        -> pd.DataFrame:
+    # this will not be viable for anime with large number of episodes
+    # since dataframe will have lots of rows, thus running out of memory
+    # let's change to chunks later
+    folder_path = 'data/' + anime_name + '/processed'
+    # list of every .ass file in anime folder
+    episodes = os.listdir(folder_path)
+    table = []
+    for episode in episodes:  # iterate over every episode
+        path = folder_path + '/' + episode
+        # get episode number (episode title is always anime_name_{episode_num}.ass)
+        episode_number = episode.split('.')[0].split('_')[-1]
+        try:
+            with open(path, encoding='utf_8_sig') as f:
+                doc = ass.parse(f)  # read .ass file
+                events = doc.events  # get every dialogue line
+                if logs == "debug":
+                    logger.info(f'Reading {path.split("/")[-1]}...')
+                for event in events:
+                    # we do not care about signs
+                    if event.style.lower() == "signs" or \
+                            event.name.lower() == "sign" or not event.name:
+                        continue
+                    # save every line with whoever said the line
+                    cleaned_text = clean_ass_text(event.text)
+                    table.append(
+                        [episode_number, event.name, cleaned_text])
+        except Exception:
+            logger.info(f'Error reading {path.split("/")[-1]}.')
+    df = pd.DataFrame(table, columns=['Episode', 'Name', 'Quote'])
+    return df

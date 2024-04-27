@@ -1,5 +1,4 @@
 import json
-from typing import List
 from base_logger.base_logger import logger
 from utils.parsers import (
     get_animes_finished_from_page,
@@ -7,12 +6,17 @@ from utils.parsers import (
     get_subtitle_links,
     get_all_links_from_provider,
     get_all_subtitles_info,
+    download_subtitles,
 )
 from utils.helpers import (
     extract_titles_and_anime_links,
     filter_links_from_provider,
     sort_options_by_priority,
+    generate_ass_files,
+    build_df_from_ass_files,
 )
+from utils.writers import write_data
+from utils.connectors import sqlite_connector
 
 
 def routine(page: int = 1, limit_per_page: int = 1):
@@ -65,5 +69,18 @@ page_count = 1
 page_limit = 1  # amount of entries to get from each page (put 9999 to get all)
 for page in range(1, page_count + 1):
     data = routine(page=page, limit_per_page=page_limit)
-    with open(f"examples/test_{page}.json", "w+", encoding="utf-8") as f:
+    with open(f"examples/page_{page}.json", "w+", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
+
+# f = open('examples/page_1.json')
+# data = json.load(f)
+# f.close()
+
+anime_list = download_subtitles("examples/page_1.json")
+test_anime = anime_list[0]
+created = generate_ass_files(filter_anime=test_anime)
+df = build_df_from_ass_files(anime_name=test_anime, logs="debug")
+con = sqlite_connector(db_name="testing_quotes")
+result = write_data(table_name=test_anime + "_quotes",
+                    con=con, df=df, if_exists="replace")
+logger.info(f"Inserted {result} rows into database!")

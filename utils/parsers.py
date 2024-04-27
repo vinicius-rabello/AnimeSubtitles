@@ -1,9 +1,16 @@
+import json
+import os
 import requests
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Literal, Optional, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from .constants import MAIN_URL, REMOVE_REPACK
-from .helpers import get_provider, convert_title_to_size, filter_subs
+from .helpers import (
+    get_provider,
+    convert_title_to_size,
+    filter_subs,
+    create_folders_for_anime,
+)
 from base_logger import logger
 
 
@@ -165,3 +172,56 @@ def get_all_subtitles_info(title: str, items: List[Dict[str, str]]) \
         already_obtained_links.add(sub_link)
 
     return items
+
+
+def download_subtitles(
+        file_path: Union[str, Dict[str, List[Dict[str, str]]]],
+        logs: Literal["minimal", "debug"] = "minimal") \
+        -> List[str]:
+    if not isinstance(file_path, (str, dict)):
+        logger.error(f"Object provided is of type {type(file_path)}. Expected"
+                     f" either str or dict.")
+        raise TypeError
+    # we accept either a path for the json or the actual json
+    elif isinstance(file_path, str):
+        try:
+            f = open(file_path)
+            data = json.load(f)
+        except Exception:
+            data = {}
+        finally:
+            f.close()
+
+    # nothing to be done
+    if not data:
+        return
+
+    anime_list = []
+    # iterate over every anime on .json file
+    for anime, episodes in data.items():
+        _ = create_folders_for_anime(anime_name=anime, logs=logs)
+        anime = anime.replace(' ', '_')
+        folder_path = f'data/{anime}/raw'
+
+        for i, episode in enumerate(episodes):
+            filename = anime + f'_{i+1}.xz'
+            link = episode['sub_link']  # get link from json file
+            # check if file is already downloaded
+            if filename not in os.listdir(folder_path):
+                response = requests.get(link, timeout=10)
+                # path like data/anime_name/anime_name_episode_number
+                file_path = os.path.join(folder_path, filename)
+                if response.status_code == 200:  # if request is successful proceed
+                    with open(file_path, 'wb') as file:
+                        # write response object to file
+                        file.write(response.content)
+                        if logs == "debug":
+                            logger.info(f'{filename} downloaded successfully.')
+                else:
+                    logger.error(
+                        f'Failed to download {filename}. Status code:', response.status_code)
+            else:
+                logger.info(f'{filename} is already downloaded')
+                continue
+        anime_list.append(anime)
+    return anime_list
