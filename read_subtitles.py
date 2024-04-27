@@ -6,7 +6,7 @@ for anime in animes:
 
     print(f'\nExcracting subtitles from {anime}\n')
 
-    folder_path = 'data/'+anime+'/raw'
+    folder_path = 'data/' + anime + '/raw'
     episodes = os.listdir(folder_path)
 
     for episode in episodes:  # iterate over every file in anime folder
@@ -20,6 +20,6 @@ for anime in animes:
         # we want to save .txt files into processed folder, not raw
         path = path.replace('raw', 'processed')
 
-        with open(path+'.ass', 'wb') as file:  # write content into .txt file
+        with open(path + '.ass', 'wb') as file:  # write content into .ass file
             file.write(content)
             print(f'{path}.ass successfuly created!')

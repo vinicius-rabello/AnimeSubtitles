@@ -1,5 +1,6 @@
 import re
 from typing import Dict, List, Tuple
+# from ass.line import Dialogue
 from bs4.element import Tag
 from base_logger import logger
 from .constants import (
@@ -108,3 +109,16 @@ def filter_subs(subs: Dict[str, str], title: str,
         logger.info(f"Did not found {target_lang} subs for link {title}.")
 
     return target_sub, target_sub_info
+
+
+def clean_ass_text(line: str) -> str:
+    # remove breakline
+    line = line.replace("\\N", "")
+
+    # remove italics
+    line = line.replace("{\\i0}", "").replace("{\\i1}", "")
+
+    # dont know what {bg} means yet
+    line = line.replace("{bg}", "")
+
+    return line
