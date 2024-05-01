@@ -38,14 +38,15 @@ def get_provider(text: str) -> str:
         provider = text.split(")")[0] + ")"
 
     # provider is (probably) at the end
-    if text.find("]") == (len(text) - 1) and not provider:
-        possible_provider = "[" + text.split("[")[-1]
-        matched = re.search(SEQUENCE_REGEX, possible_provider)
-        if not matched:
-            provider = possible_provider
+    # CURRENTLY IGNORING PROVIDERS AT THE END
+    # if text.find("]") == (len(text) - 1) and not provider:
+    #     possible_provider = "[" + text.split("[")[-1]
+    #     matched = re.search(SEQUENCE_REGEX, possible_provider)
+    #     if not matched:
+    #         provider = possible_provider
 
-    if text.find(")") == (len(text) - 1) and not provider:
-        provider = "(" + text.split(")")[-1]
+    # if text.find(")") == (len(text) - 1) and not provider:
+    #     provider = "(" + text.split(")")[-1]
 
     return provider
 
@@ -124,13 +125,14 @@ def filter_links_from_provider(
 def clean_title_string(
     title: str, quality: str, sequence: str, batch_provider: str
 ) -> str:
-    # base cleaning
+    # base cleaning (remove quality and torrent sequence)
     title = title.replace(quality, "").replace(sequence, "")
+    # hevc changes nothing subtitle-wise
+    title = title.replace("[HEVC]", "").replace(" HEVC", "")
 
     # try specific filter for current batch provider
     match batch_provider:
         case "[Erai-raws]":
-            title = title.replace("HEVC", "")
             # needs more testing, may remove too much
             title = title.split("[Multiple Subtitle]")[0]
         case _:
@@ -296,7 +298,7 @@ def build_df_from_ass_files(
             logger.info(f'Error reading {path.split("/")[-1]}.')
     df = pd.DataFrame(
         table, columns=['Episode', 'Name', 'Quote'])
-    df = df.astype({'Episode': 'int32'})
+    df = df.astype({'Episode': 'float32'})
     logger.info(
         f"{len(df) - no_character_name}/{len(df)} quotes with character name.")
 
