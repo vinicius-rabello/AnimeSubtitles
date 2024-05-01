@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 # from typing import Dict, List
 # from utils.parsers import (
 #     download_subtitles,
@@ -22,6 +23,7 @@ logging.basicConfig(
 )
 
 # Specify parameters
+start = time.time()
 page_count = 1
 page_limit = 99
 filter_anime = ""
@@ -37,7 +39,8 @@ for page in range(1, page_count + 1):
     page = "teste" if test_file else page
     with open(f"examples/page_{page}.json", "w+", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
-
+end = time.time()
+logger.info(f"Finished in {round(end - start)}s")
 # anime_list = download_subtitles("examples/page_1.json")
 # for test_anime in anime_list[:1]:
 # test_anime = "Helck"
