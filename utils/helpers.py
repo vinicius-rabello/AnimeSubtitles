@@ -24,28 +24,56 @@ logging.basicConfig(
 
 
 def get_provider(text: str) -> str:
-    # provider is at the end
-    if text.find("]") == (len(text) - 1):
-        return "[" + text.split("[")[-1]
+    # provider is (probably) at the start
+    provider = ""
+    if text.find("[") == 0:
+        possible_provider = text.split("]")[0] + "]"
+        matched = re.search(SEQUENCE_REGEX, possible_provider)
+        if not matched:
+            # then we know it is the provider
+            provider = possible_provider
 
-    # provider is at the start
-    elif text.find("[") == 0:
-        return text.split("]")[0] + "]"
+    if text.find("(") == 0:
+        # regex not needed here since torrent sequence do not appear inside ()
+        provider = text.split(")")[0] + ")"
 
-    # weird provider
-    else:
-        return ""
+    # provider is (probably) at the end
+    if text.find("]") == (len(text) - 1) and not provider:
+        possible_provider = "[" + text.split("[")[-1]
+        matched = re.search(SEQUENCE_REGEX, possible_provider)
+        if not matched:
+            provider = possible_provider
+
+    if text.find(")") == (len(text) - 1) and not provider:
+        provider = "(" + text.split(")")[-1]
+
+    return provider
 
 
-def extract_titles_and_anime_links(animes: List[Tag]) \
+def extract_titles_and_anime_links(animes: List[Tag], filter_anime: str = "") \
         -> Tuple[List[str], List[str]]:
     titles, links = [], []
+    filter_anime = format_title_for_filter(filter_anime)
+
     for entry in animes:
         link = entry.find('a').get('href')
         title = entry.find('strong').text
+        title_for_comparison = format_title_for_filter(title)
+
+        if filter_anime:
+            if title_for_comparison == filter_anime:
+                links.append(link)
+                titles.append(title)
+            continue
+
         links.append(link)
         titles.append(title)
+
     return titles, links
+
+
+def format_title_for_filter(title: str) -> str:
+    return title.replace(" ", "").lower()
 
 
 def convert_title_to_size(title: str) -> float:
@@ -86,7 +114,7 @@ def filter_links_from_provider(
         excess = len(filtered_entries) - ep_count
         if excess:
             logger.info(
-                f"Title has {excess} subs more than number of episodes.")
+                f"Title has {excess} subs compared to number of episodes.")
 
     logger.info(
         f"{len(filtered_entries)} subs remained after regex filtering.")
@@ -102,7 +130,7 @@ def clean_title_string(
     # try specific filter for current batch provider
     match batch_provider:
         case "[Erai-raws]":
-            title = title.replace("[HEVC]", "")
+            title = title.replace("HEVC", "")
             # needs more testing, may remove too much
             title = title.split("[Multiple Subtitle]")[0]
         case _:
@@ -110,17 +138,30 @@ def clean_title_string(
     return title
 
 
-def filter_subs(subs: Dict[str, str], title: str,
-                target_lang: str = DESIRED_SUBS) -> Tuple[str, str]:
-    target_sub, target_sub_info = "", ""
-    for sub_info, sub_link in subs.items():
-        if target_lang in sub_info:
-            target_sub, target_sub_info = sub_link, sub_info
-            break
-    if not target_sub and len(subs) > 1:
-        logger.info(f"Did not found {target_lang} subs for link {title}.")
+def filter_subs(
+        link: str,
+        subs: Dict[str, str],
+        target_lang: str = DESIRED_SUBS
+) -> Tuple[str, str]:
+    sub_info, sub_link = "", ""
 
-    return target_sub, target_sub_info
+    for lang, link in subs.items():
+        matched = re.search(
+            target_lang, lang, re.IGNORECASE
+        )
+        link_type = link[-6:]
+        correct_format = (link_type == "ass.xz")
+
+        if matched and correct_format:
+            # this one is good to go
+            sub_info = lang
+            sub_link = link
+            break
+
+    if not sub_info:
+        logger.debug(f"Did not found {target_lang} subs for link {link}.")
+
+    return sub_info, sub_link
 
 
 def clean_ass_text(line: str) -> str:

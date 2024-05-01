@@ -1,11 +1,12 @@
 import json
 import logging
 import os
+# import re
 import requests
 from typing import Dict, List, Literal, Optional, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-from .constants import MAIN_URL, REMOVE_REPACK, FORMAT
+from .constants import MAIN_URL, REMOVE_REPACK, FORMAT, DESIRED_SUBS
 from .helpers import (
     get_provider,
     convert_title_to_size,
@@ -35,6 +36,9 @@ def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
 
     except TimeoutError:
         logger.error(f"Timeout when during page {page} request.")
+
+    except Exception as e:
+        logger.error(str(e))
 
     return finished_entries
 
@@ -90,46 +94,72 @@ def get_batch_options_and_episode_count(title: str, link: str) \
     return batch_options, list(fonts_set), int(episode_count)
 
 
-def get_subtitle_links(link: str) -> Optional[Tag]:
-    target_row = ""
-    # print(link)
+def get_subtitle_links(link: str, desired_subs: str = DESIRED_SUBS) -> Tuple[str, str]:
+    sub_info, sub_link = "", ""
 
-    res = requests.get(url=link, timeout=60)
+    if not link:
+        return "", ""
+
+    try:
+        res = requests.get(url=link, timeout=60)
+    except Exception as e:
+        logging.debug(str(e))
+        logging.warning(f"Failed to request subtitle data from link {link}.")
+        return "", ""
+
     soup = BeautifulSoup(res.text, 'html.parser')
     content = soup.find("div", id="content")
     if not content:
-        print(link)
-        # bad link
-        return ""
+        # no divs implies no subtitles
+        return "", ""
+
     tables = content.find_all("table", recursive=False)
     if not tables:
-        # bad link
-        return ""
+        # no tables implies no subtitles
+        return "", ""
+
     for table in tables:
         # if last row has Subtitles as header, then page may have download links
         last_row = table.find_all("tr", recursive=False)[-1]
+
         if last_row.find("th").text == "Subtitles":
+            # now, we may or may not have eng subs
             target_row = last_row
-            # print("Target Row:", target_row)
+            sub_options = parse_subtitles(target_row.find("td"))
+
+            # check for en subs and see if has .ass downloadable file
+            sub_info, sub_link = filter_subs(
+                link=link, subs=sub_options, target_lang=desired_subs
+            )
             break
 
-    if not target_row:
-        # no available subtitles
-        return ""
+    return sub_info, sub_link
 
-    subs_links = target_row.find("td")
+
+def parse_subtitles(subs: Optional[Tag]) -> Dict[str, str]:
+    if not subs:
+        return dict()
+
+    subs_links = dict()
+    attachments = subs.find_all("a")
+    for sub in attachments:
+        subs_links[sub.text] = sub.get("href")
     return subs_links
 
 
 def get_all_links_from_provider(provider: str, page: str, link: str) \
-        -> List[Dict[str, str]]:
+        -> Tuple[List[Dict[str, str]], bool]:
     episode_links = []
     url = link + REMOVE_REPACK + f"&page={page}"
     res = requests.get(url, timeout=60)
     soup = BeautifulSoup(res.text, 'html.parser')
+    has_entries = False
 
     parent_divs = soup.find_all("div", class_="home_list_entry")
+    # if no parent_divs, then there is nothing on the page
     if parent_divs:
+        has_entries = True
+
         for candidate in parent_divs:
             # skip all batches
             is_batch = candidate.find("div", class_="links").find("em")
@@ -148,36 +178,24 @@ def get_all_links_from_provider(provider: str, page: str, link: str) \
                     "link_title": curr_link.text,
                     "link_url": curr_link.get("href")
                 })
-    return episode_links
-
-
-def parse_subtitles(subs: Optional[Tag]) -> Dict[str, str]:
-    if not subs:
-        return dict()
-
-    subs_links = dict()
-    attachments = subs.find_all("a")
-    for sub in attachments:
-        subs_links[sub.text] = sub.get("href")
-    return subs_links
+    return episode_links, has_entries
 
 
 def get_all_subtitles_info(title: str, items: List[Dict[str, str]]) \
         -> List[Dict[str, str]]:
-
     final_object = []
     already_obtained_links = set()
     total_to_gather = len(items)
-    logger.info(f"Preparing to gather subtitles links for anime {title}...")
+    logger.info(f"Gathering subtitle links for anime {title}...")
+
     for idx, item in enumerate(items):
-        sub_tag = get_subtitle_links(item["link_url"])
-        sub_links_info = parse_subtitles(sub_tag)
+        link_url = item.get("link_url", "")
+        sub_info, sub_link = get_subtitle_links(link_url)
         if ((idx+1) % 10) == 0 or (idx + 1) == total_to_gather:
             logger.info(f"[Progress|Total]: [{idx+1}|{total_to_gather}]")
 
-        # filter for eng subs
-        sub_link, sub_info = filter_subs(sub_links_info, title)
-        if sub_link in already_obtained_links:
+        # skip repeated episodes and episodes without subs
+        if sub_link in already_obtained_links or not sub_link:
             continue
 
         item["sub_link"] = sub_link
