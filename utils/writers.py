@@ -1,7 +1,15 @@
+import logging
 import pandas as pd
 from typing import Literal, Optional
-from base_logger import logger
 from sqlalchemy.engine.base import Engine
+from .constants import FORMAT
+
+# setup logger
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    format=FORMAT,
+    level=logging.INFO,
+    handlers=[logging.StreamHandler()])
 
 
 def write_data(
@@ -9,6 +17,11 @@ def write_data(
     if_exists: Literal["fail", "replace", "append"] = "fail",
     clear_songs: bool = True
 ) -> Optional[int]:
+    # empty df
+    if df.empty:
+        logger.info("Nothing to be done, empty dataframe.")
+        return 0
+
     if clear_songs:
         songs = df[(df["Name"] == "ED") | (df["Name"] == "OP")]
         if len(songs) > 0:

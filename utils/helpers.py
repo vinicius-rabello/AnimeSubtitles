@@ -1,4 +1,5 @@
 import ass
+import logging
 import lzma
 import re
 import os
@@ -6,13 +7,20 @@ import pandas as pd
 from typing import Dict, Literal, List, Tuple
 # from ass.line import Dialogue
 from bs4.element import Tag
-from base_logger import logger
 from .constants import (
     SEQUENCE_REGEX,
     QUALITY_REGEX,
     PREFERENCE_RAWS,
     DESIRED_SUBS,
+    FORMAT,
 )
+
+# Setup logger
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    format=FORMAT,
+    level=logging.INFO,
+    handlers=[logging.StreamHandler()])
 
 
 def get_provider(text: str) -> str:
@@ -129,8 +137,9 @@ def clean_ass_text(line: str) -> str:
 
 
 def create_folders_for_anime(
-        anime_name: str, logs: Literal["minimal", "debug"] = "minimal") -> str:
+        anime_name: str, logs: Literal["minimal", "debug"] = "minimal") -> bool:
     logger.info("Creating folders...")
+    completed = True
     # check if data folder already exists
     if not os.path.exists('data'):
         try:
@@ -138,6 +147,7 @@ def create_folders_for_anime(
             logger.info('General data folder created!')
         except Exception:
             logger.error('Error while creating general data folder.')
+            completed = False
     else:
         logger.info('General data folder already exists!')
 
@@ -153,16 +163,17 @@ def create_folders_for_anime(
                 logger.info(f"Folder {path} created!")
         except Exception:
             logger.error(f'Error creating folder for {anime}')
+            completed = False
     else:
         logger.info(f'Folder for anime {anime} already exists!')
     logger.info(f"Finished creating folders for anime {anime_name}.")
 
-    return anime_name
+    return completed
 
 
 def generate_ass_files(filter_anime: str = "") -> List[str]:
     created = []
-    filter_anime = filter_anime.replace(" ", "")
+    filter_anime = filter_anime.replace(" ", "_")
     animes = os.listdir('data')
     for anime in animes:
         # for testing purposes
@@ -212,7 +223,8 @@ def build_df_from_ass_files(
     # this will not be viable for anime with large number of episodes
     # since dataframe will have lots of rows, thus running out of memory
     # let's change to chunks later
-    folder_path = 'data/' + anime_name + '/processed'
+    no_character_name = 0
+    folder_path = 'data/' + anime_name.replace(" ", "_") + '/processed'
     # list of every .ass file in anime folder
     episodes = os.listdir(folder_path)
     table = []
@@ -225,17 +237,26 @@ def build_df_from_ass_files(
                 doc = ass.parse(f)  # read .ass file
                 events = doc.events  # get every dialogue line
                 if logs == "debug":
-                    logger.info(f'Reading {path.split("/")[-1]}...')
+                    logger.debug(f'Reading {path.split("/")[-1]}...')
                 for event in events:
                     # we do not care about signs
                     if event.style.lower() == "signs" or \
-                            event.name.lower() == "sign" or not event.name:
+                            event.name.lower() == "sign":
                         continue
+                    # we will probably not have the character names
+                    elif not event.name:
+                        event.name = "Unknown"
+                        no_character_name += 1
                     # save every line with whoever said the line
                     cleaned_text = clean_ass_text(event.text)
                     table.append(
                         [episode_number, event.name, cleaned_text])
         except Exception:
             logger.info(f'Error reading {path.split("/")[-1]}.')
-    df = pd.DataFrame(table, columns=['Episode', 'Name', 'Quote'])
+    df = pd.DataFrame(
+        table, columns=['Episode', 'Name', 'Quote'])
+    df.astype({'Episode': 'int32'})
+    logger.info(
+        f"{len(df) - no_character_name}/{len(df)} quotes with character name.")
+
     return df

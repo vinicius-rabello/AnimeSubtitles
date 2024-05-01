@@ -1,17 +1,24 @@
 import json
+import logging
 import os
 import requests
 from typing import Dict, List, Literal, Optional, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-from .constants import MAIN_URL, REMOVE_REPACK
+from .constants import MAIN_URL, REMOVE_REPACK, FORMAT
 from .helpers import (
     get_provider,
     convert_title_to_size,
     filter_subs,
     create_folders_for_anime,
 )
-from base_logger import logger
+
+# setup logger
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    format=FORMAT,
+    level=logging.INFO,
+    handlers=[logging.StreamHandler()])
 
 
 def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
@@ -90,7 +97,14 @@ def get_subtitle_links(link: str) -> Optional[Tag]:
     res = requests.get(url=link, timeout=60)
     soup = BeautifulSoup(res.text, 'html.parser')
     content = soup.find("div", id="content")
+    if not content:
+        print(link)
+        # bad link
+        return ""
     tables = content.find_all("table", recursive=False)
+    if not tables:
+        # bad link
+        return ""
     for table in tables:
         # if last row has Subtitles as header, then page may have download links
         last_row = table.find_all("tr", recursive=False)[-1]
@@ -154,7 +168,7 @@ def get_all_subtitles_info(title: str, items: List[Dict[str, str]]) \
     final_object = []
     already_obtained_links = set()
     total_to_gather = len(items)
-    logger.info("Preparing to gather subtitles links...")
+    logger.info(f"Preparing to gather subtitles links for anime {title}...")
     for idx, item in enumerate(items):
         sub_tag = get_subtitle_links(item["link_url"])
         sub_links_info = parse_subtitles(sub_tag)
@@ -199,16 +213,35 @@ def download_subtitles(
     anime_list = []
     # iterate over every anime on .json file
     for anime, episodes in data.items():
-        _ = create_folders_for_anime(anime_name=anime, logs=logs)
+        error_count = 0
+        result = create_folders_for_anime(anime_name=anime, logs=logs)
+        if not result:
+            logger.warning(
+                f"Failed creating folders for anime {anime}. Skipping...")
+            continue
         anime = anime.replace(' ', '_')
         folder_path = f'data/{anime}/raw'
 
         for i, episode in enumerate(episodes):
             filename = anime + f'_{i+1}.xz'
-            link = episode['sub_link']  # get link from json file
+            # TODO: make this part better
+            try:
+                # get link from json file
+                link = episode['sub_link']
+            except Exception as e:
+                continue
+            if not link:
+                continue
             # check if file is already downloaded
             if filename not in os.listdir(folder_path):
-                response = requests.get(link, timeout=10)
+                try:
+                    response = requests.get(link, timeout=10)
+                # TODO: make this better (specify problem)
+                except Exception as e:
+                    logger.warning(
+                        f"Error when downloading file from link: {link}")
+                    error_count += 1
+                    continue
                 # path like data/anime_name/anime_name_episode_number
                 file_path = os.path.join(folder_path, filename)
                 if response.status_code == 200:  # if request is successful proceed
@@ -216,12 +249,18 @@ def download_subtitles(
                         # write response object to file
                         file.write(response.content)
                         if logs == "debug":
-                            logger.info(f'{filename} downloaded successfully.')
+                            logger.debug(
+                                f'{filename} downloaded successfully.')
                 else:
                     logger.error(
                         f'Failed to download {filename}. Status code:', response.status_code)
             else:
-                logger.info(f'{filename} is already downloaded')
+                logger.debug(f'{filename} is already downloaded')
                 continue
         anime_list.append(anime)
+        logger.info(f"Finished downloading files for anime {anime}.")
+        if error_count > 0:
+            logger.info(
+                f"Failed {error_count} from a total of {len(episode)} files.")
+
     return anime_list
