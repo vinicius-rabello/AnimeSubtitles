@@ -5,3 +5,5 @@ QUALITY_REGEX = r'(\d{3,4}p)'  # matches quality, e.g. 720p
 SEQUENCE_REGEX = r'\[([A-Z0-9]{8})\]'  # matches torrent sequence
 DESIRED_SUBS = "eng"
 FORMAT = "[%(filename)s | %(funcName)s : %(lineno)s] %(levelname)s: %(message)s"
+DEFAULT_ATTEMPTS = 3
+DEFAULT_WAIT_TIME = 15.0

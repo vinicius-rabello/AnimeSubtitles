@@ -3,10 +3,18 @@ import logging
 import os
 # import re
 import requests
+from time import sleep
 from typing import Dict, List, Literal, Optional, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-from .constants import MAIN_URL, REMOVE_REPACK, FORMAT, DESIRED_SUBS
+from .constants import (
+    MAIN_URL,
+    REMOVE_REPACK,
+    FORMAT,
+    DESIRED_SUBS,
+    DEFAULT_ATTEMPTS,
+    DEFAULT_WAIT_TIME,
+)
 from .helpers import (
     get_provider,
     convert_title_to_size,
@@ -96,26 +104,49 @@ def get_batch_options_and_episode_count(title: str, link: str) \
 
 def get_subtitle_links(link: str, desired_subs: str = DESIRED_SUBS) -> Tuple[str, str]:
     sub_info, sub_link = "", ""
+    wait, wait_time = False, DEFAULT_WAIT_TIME
+    max_attempts = DEFAULT_ATTEMPTS
+    completed = False
+    attempts = 0
 
     if not link:
         return "", ""
 
-    try:
-        res = requests.get(url=link, timeout=60)
-    except Exception as e:
-        logging.debug(str(e))
-        logging.warning(f"Failed to request subtitle data from link {link}.")
-        return "", ""
+    # TODO: move this whole request logic to a helper function
+    while not completed and attempts < max_attempts:
+        if wait:
+            sleep(wait_time)
+        try:
+            res = requests.get(url=link, timeout=60)
+            completed = res.ok
+            if completed:
+                break
+            # lets try again but now waiting a little
+            wait = True
+            attempts += 1
+            wait_time *= attempts
+            logger.info(f"Received '{res.reason}' for link {link}. "
+                        f"Trying again after {wait_time}s.")
+
+        except Exception as e:
+            logging.debug(str(e))
+            logging.warning(
+                f"Failed to request subtitle data from link {link}.")
+            return "", ""
 
     soup = BeautifulSoup(res.text, 'html.parser')
     content = soup.find("div", id="content")
-    if not content:
+    if not content or (attempts == max_attempts):
         # no divs implies no subtitles
+        logger.warning(
+            f"Could not get subtitles for link {link} after {max_attempts} "
+            "attempts.")
         return "", ""
 
     tables = content.find_all("table", recursive=False)
     if not tables:
         # no tables implies no subtitles
+        logger.warning(f"No table found on link {link}.")
         return "", ""
 
     for table in tables:
@@ -251,7 +282,7 @@ def download_subtitles(
             try:
                 # get link from json file
                 link = episode['sub_link']
-            except Exception as e:
+            except Exception as _:
                 continue
             if not link:
                 continue
@@ -260,7 +291,7 @@ def download_subtitles(
                 try:
                     response = requests.get(link, timeout=10)
                 # TODO: make this better (specify problem)
-                except Exception as e:
+                except Exception as _:
                     logger.warning(
                         f"Error when downloading file from link: {link}")
                     error_count += 1
