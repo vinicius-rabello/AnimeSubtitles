@@ -1,5 +1,6 @@
 import json
 import logging
+import random
 # from typing import Dict, List
 # from utils.parsers import (
 #     download_subtitles,
@@ -24,8 +25,9 @@ logging.basicConfig(
 # Specify parameters
 page_count = 1
 page_limit = 99
-filter_anime = ""
+filter_anime = "Yofukashi no Uta"
 desired_subs = DESIRED_SUBS
+test_file = True
 for page in range(1, page_count + 1):
     data = build_json_with_links(
         page=page,
@@ -33,6 +35,7 @@ for page in range(1, page_count + 1):
         filter_anime=filter_anime,
         desired_subs=desired_subs
     )
+    page = "teste" if test_file else page
     with open(f"examples/page_{page}.json", "w+", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 

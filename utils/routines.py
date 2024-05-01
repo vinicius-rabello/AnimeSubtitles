@@ -133,7 +133,9 @@ def build_json_with_links(
             data[title], provider_selected, episode_count)
 
     for anime_title, anime_info in data.items():
-        all_subs_info = get_all_subtitles_info(anime_title, anime_info)
+        all_subs_info = get_all_subtitles_info(
+            anime_title, anime_info, desired_subs
+        )
         data[anime_title] = all_subs_info
 
     return data

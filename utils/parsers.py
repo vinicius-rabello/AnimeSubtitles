@@ -181,8 +181,11 @@ def get_all_links_from_provider(provider: str, page: str, link: str) \
     return episode_links, has_entries
 
 
-def get_all_subtitles_info(title: str, items: List[Dict[str, str]]) \
-        -> List[Dict[str, str]]:
+def get_all_subtitles_info(
+        title: str,
+        items: List[Dict[str, str]],
+        desired_subs: str = DESIRED_SUBS
+) -> List[Dict[str, str]]:
     final_object = []
     already_obtained_links = set()
     total_to_gather = len(items)
@@ -190,7 +193,9 @@ def get_all_subtitles_info(title: str, items: List[Dict[str, str]]) \
 
     for idx, item in enumerate(items):
         link_url = item.get("link_url", "")
-        sub_info, sub_link = get_subtitle_links(link_url)
+        sub_info, sub_link = get_subtitle_links(
+            link_url, desired_subs=desired_subs)
+
         if ((idx+1) % 10) == 0 or (idx + 1) == total_to_gather:
             logger.info(f"[Progress|Total]: [{idx+1}|{total_to_gather}]")
 
