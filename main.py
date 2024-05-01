@@ -85,12 +85,13 @@ page_limit = 1
 # data = json.load(f)
 # f.close()
 
-anime_list = download_subtitles("examples/page_1.json")
-for test_anime in anime_list:
-    logger.info(f"---------- Processing anime: {test_anime} ----------")
-    created = generate_ass_files(filter_anime=test_anime)
-    df = build_df_from_ass_files(anime_name=test_anime, logs="minimal")
-    con = sqlite_connector(db_name="testing_quotes")
-    result = write_data(table_name=test_anime + "_quotes",
-                        con=con, df=df, if_exists="replace")
-    logger.info(f"Inserted {result} rows into database!")
+# anime_list = download_subtitles("examples/page_1.json")
+# for test_anime in anime_list[:1]:
+test_anime = "Helck"
+logger.info(f"---------- Processing anime: {test_anime} ----------")
+created = generate_ass_files(filter_anime=test_anime)
+df = build_df_from_ass_files(anime_name=test_anime, logs="minimal")
+con = sqlite_connector(db_name="testing_quotes")
+result = write_data(table_name=test_anime + "_quotes",
+                    con=con, df=df, if_exists="replace")
+logger.info(f"Inserted {result} rows into database!")

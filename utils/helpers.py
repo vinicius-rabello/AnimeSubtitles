@@ -255,7 +255,7 @@ def build_df_from_ass_files(
             logger.info(f'Error reading {path.split("/")[-1]}.')
     df = pd.DataFrame(
         table, columns=['Episode', 'Name', 'Quote'])
-    df.astype({'Episode': 'int32'})
+    df = df.astype({'Episode': 'int32'})
     logger.info(
         f"{len(df) - no_character_name}/{len(df)} quotes with character name.")
 
