@@ -4,7 +4,7 @@ import lzma
 import re
 import os
 import pandas as pd
-from typing import Dict, Literal, List, Tuple
+from typing import Dict, Literal, List, Optional, Tuple
 # from ass.line import Dialogue
 from bs4.element import Tag
 from .constants import (
@@ -303,3 +303,21 @@ def build_df_from_ass_files(
         f"{len(df) - no_character_name}/{len(df)} quotes with character name.")
 
     return df
+
+
+def get_mal_id(div: Optional[Tag], title: str) -> int:
+    mal_div = div[-1] if div else None
+
+    if mal_div is None:
+        return 0
+
+    # getting id via url
+    try:
+        mal_id = mal_div.find("a", string="MAL").get(
+            "href").split("/")[-1]
+    except Exception as e:
+        logger.warning(f"Failed to get MAL id for anime {title}")
+        logger.debug(str(e))
+        mal_id = 0
+
+    return int(mal_id)

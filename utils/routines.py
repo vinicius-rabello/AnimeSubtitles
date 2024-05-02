@@ -83,7 +83,7 @@ def build_json_with_links(
         logger.info(f"Processing anime: {title}")
         data[title] = []
 
-        providers_info, provider_names, episode_count = \
+        providers_info, provider_names, episode_count, mal_id = \
             get_batch_options_and_episode_count(title=title, link=link)
         logger.debug(f"Batch Providers: {provider_names}")
 
@@ -93,6 +93,8 @@ def build_json_with_links(
                 f"No available provider for anime {title}. Skipping..."
             )
             continue
+
+        # TODO: check if anime is revelant by MAL id before continuing
 
         provider_selected = ""
         # sort provider_names by priority

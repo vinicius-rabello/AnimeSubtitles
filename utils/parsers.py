@@ -20,6 +20,7 @@ from .helpers import (
     convert_title_to_size,
     filter_subs,
     create_folders_for_anime,
+    get_mal_id,
 )
 
 # setup logger
@@ -52,7 +53,7 @@ def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
 
 
 def get_batch_options_and_episode_count(title: str, link: str) \
-        -> Tuple[Dict[str, str], List[str], int]:
+        -> Tuple[Dict[str, str], List[str], int, int]:
     batch_options = {}
     url = link + REMOVE_REPACK
     res = requests.get(url, timeout=60)
@@ -84,11 +85,13 @@ def get_batch_options_and_episode_count(title: str, link: str) \
         batch_options[provider] = batch_obj.get("href")
         fonts_set.add(provider)
         current_choice += 1
+
     # not a single option below 16gb for this anime
     if not current_choice:
         logger.warning(
             f"No available file below 16GB for anime {title}."
         )
+
     # get episode count
     episode_div = soup.select_one("table > tbody > tr > td > div > div")
     try:
@@ -97,9 +100,12 @@ def get_batch_options_and_episode_count(title: str, link: str) \
         logger.info(f"Got episode count of {episode_count}.")
     except Exception:
         episode_count = 0
-        pass
 
-    return batch_options, list(fonts_set), int(episode_count)
+    # get MAL id
+    infos_div = soup.select("table > tbody > tr > td > div", limit=2)
+    mal_id = get_mal_id(div=infos_div, title=title)
+
+    return batch_options, list(fonts_set), int(episode_count), mal_id
 
 
 def get_subtitle_links(link: str, desired_subs: str = DESIRED_SUBS) -> Tuple[str, str]:

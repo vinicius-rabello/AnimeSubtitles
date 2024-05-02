@@ -26,9 +26,9 @@ logging.basicConfig(
 start = time.time()
 page_count = 1
 page_limit = 99
-filter_anime = ""
+filter_anime = "Mashle"
 desired_subs = DESIRED_SUBS
-test_file = False
+test_file = True
 for page in range(1, page_count + 1):
     data = build_json_with_links(
         page=page,
