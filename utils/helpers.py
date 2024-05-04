@@ -1,10 +1,11 @@
 import ass
+import json
 import logging
 import lzma
 import re
 import os
 import pandas as pd
-from typing import Dict, Literal, List, Optional, Tuple
+from typing import Any, Dict, Literal, List, Optional, Tuple, Union
 # from ass.line import Dialogue
 from bs4.element import Tag
 from .constants import (
@@ -179,20 +180,26 @@ def clean_ass_text(line: str) -> str:
     return line
 
 
-def create_folders_for_anime(
-        anime_name: str, logs: Literal["minimal", "debug"] = "minimal") -> bool:
-    logger.info("Creating folders...")
-    completed = True
+def create_data_folder() -> None:
     # check if data folder already exists
     if not os.path.exists('data'):
         try:
             os.mkdir('data')
             logger.info('General data folder created!')
         except Exception:
-            logger.error('Error while creating general data folder.')
-            completed = False
-    else:
-        logger.info('General data folder already exists!')
+            logger.error(
+                'Error while creating general data folder. Cannot procede.')
+            raise RuntimeError
+
+    return
+
+
+def create_folders_for_anime(
+    anime_name: str,
+    # logs: Literal["minimal", "debug"] = "minimal"
+) -> bool:
+    logger.info("Trying to create necessary folders...")
+    completed = True
 
     anime = anime_name.replace(' ', '_')
     path = f'data/{anime}'
@@ -202,14 +209,14 @@ def create_folders_for_anime(
             os.mkdir(path)
             os.mkdir(path + '/raw')
             os.mkdir(path + '/processed')
-            if logs == "debug":
-                logger.info(f"Folder {path} created!")
+            logger.debug(f"Folder {path} created!")
         except Exception:
-            logger.error(f'Error creating folder for {anime}')
+            # log on the parent function
             completed = False
-    else:
-        logger.info(f'Folder for anime {anime} already exists!')
-    logger.info(f"Finished creating folders for anime {anime_name}.")
+
+    if completed:
+        logger.info(
+            f"Successfully created folders for anime {anime_name}.")
 
     return completed
 
@@ -321,3 +328,22 @@ def get_mal_id(div: Optional[Tag], title: str) -> int:
         mal_id = 0
 
     return int(mal_id)
+
+
+def process_data_input(file_path: Union[str, Dict[str, Any]]) -> Dict[str, Any]:
+    if not isinstance(file_path, (str, dict)):
+        logger.error(f"Object provided is of type {type(file_path)}. Expected"
+                     f" either str or dict.")
+        raise TypeError
+
+    # we accept either a path for the json or the actual json
+    elif isinstance(file_path, str):
+        try:
+            f = open(file_path)
+            data = json.load(f)
+        except Exception:
+            data = {}
+        finally:
+            f.close()
+
+    return data

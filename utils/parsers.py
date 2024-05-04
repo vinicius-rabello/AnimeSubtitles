@@ -1,10 +1,10 @@
-import json
+# import json
 import logging
 import os
 # import re
 import requests
 from time import sleep
-from typing import Dict, List, Literal, Optional, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from .constants import (
@@ -21,6 +21,9 @@ from .helpers import (
     filter_subs,
     create_folders_for_anime,
     get_mal_id,
+    process_data_input,
+    create_data_folder,
+    format_title_for_filter,
 )
 
 # setup logger
@@ -248,75 +251,109 @@ def get_all_subtitles_info(
     return items
 
 
+def get_subtitle_file(link: str) -> Optional[requests.Response]:
+    try:
+        response = requests.get(link, timeout=10)
+    # TODO: make this better (specify problem)
+    except Exception as e:
+        logger.warning(
+            f"Error when downloading file from link: {link}"
+        )
+        logger.debug(e)
+        response = None
+
+    return response
+
+
+def save_subtitle_file(
+    response: Optional[requests.Response],
+    file_path: str
+) -> bool:
+    completed = False
+    # bad request, did not got file
+    if not response:
+        return completed
+
+    # if request is successful proceed
+    if response.status_code == 200:
+        filename = file_path.split("/")[-1]
+        with open(file_path, 'wb') as file:
+            # write response object to file
+            file.write(response.content)
+            logger.debug(f'{filename} downloaded successfully.')
+            completed = True
+    else:
+        logger.error(
+            f'Failed to download {filename}. Status code:', response.status_code)
+
+    return completed
+
+
 def download_subtitles(
-        file_path: Union[str, Dict[str, List[Dict[str, str]]]],
-        logs: Literal["minimal", "debug"] = "minimal") \
-        -> List[str]:
-    if not isinstance(file_path, (str, dict)):
-        logger.error(f"Object provided is of type {type(file_path)}. Expected"
-                     f" either str or dict.")
-        raise TypeError
-    # we accept either a path for the json or the actual json
-    elif isinstance(file_path, str):
-        try:
-            f = open(file_path)
-            data = json.load(f)
-        except Exception:
-            data = {}
-        finally:
-            f.close()
+    file_path: Union[str, Dict[str, List[Dict[str, str]]]],
+    filter_anime: str = "",
+    # logs: Literal["minimal", "debug"] = "minimal"
+) -> List[str]:
+    # verify data
+    data = process_data_input(file_path)
 
     # nothing to be done
     if not data:
         return
 
+    # create general data folder to store every anime folder
+    try:
+        create_data_folder()
+    except Exception as e:
+        raise e
+
     anime_list = []
+    filter_anime = format_title_for_filter(filter_anime)
     # iterate over every anime on .json file
     for anime, episodes in data.items():
+        # target just entry/entries from filter
+        if filter_anime and filter_anime not in format_title_for_filter(anime):
+            continue
+        logger.info(f"---------- Processing anime {anime} ----------")
         error_count = 0
-        result = create_folders_for_anime(anime_name=anime, logs=logs)
+        result = create_folders_for_anime(anime_name=anime)
+
         if not result:
             logger.warning(
                 f"Failed creating folders for anime {anime}. Skipping...")
             continue
+
         anime = anime.replace(' ', '_')
         folder_path = f'data/{anime}/raw'
 
-        for i, episode in enumerate(episodes):
-            filename = anime + f'_{i+1}.xz'
-            # TODO: make this part better
-            try:
-                # get link from json file
-                link = episode['sub_link']
-            except Exception as _:
+        logger.info("Downloading subtitles...")
+        for idx, episode in enumerate(episodes):
+            filename = anime + f'_{idx+1}.xz'
+            sub_link = episode.get("sub_link", "")
+
+            if not sub_link:
+                logger.debug(
+                    f"Subtitle file for episode {episode} does not exists.")
                 continue
-            if not link:
-                continue
+
             # check if file is already downloaded
             if filename not in os.listdir(folder_path):
-                try:
-                    response = requests.get(link, timeout=10)
-                # TODO: make this better (specify problem)
-                except Exception as _:
-                    logger.warning(
-                        f"Error when downloading file from link: {link}")
-                    error_count += 1
-                    continue
                 # path like data/anime_name/anime_name_episode_number
                 file_path = os.path.join(folder_path, filename)
-                if response.status_code == 200:  # if request is successful proceed
-                    with open(file_path, 'wb') as file:
-                        # write response object to file
-                        file.write(response.content)
-                        if logs == "debug":
-                            logger.debug(
-                                f'{filename} downloaded successfully.')
-                else:
-                    logger.error(
-                        f'Failed to download {filename}. Status code:', response.status_code)
+                sub_file = get_subtitle_file(link=sub_link)
+                completed = save_subtitle_file(
+                    response=sub_file, file_path=file_path
+                )
+                if not completed:
+                    error_count += 1
+
             else:
                 logger.debug(f'{filename} is already downloaded')
                 continue
+
+            if ((idx+1) % 10) == 0 or (idx+1) == len(episodes):
+                logger.info(f"[Progress|Total]: [{idx+1}|{len(episodes)}]")
+
         anime_list.append(anime)
         logger.info(f"Finished downloading files for anime {anime}.")
         if error_count > 0:

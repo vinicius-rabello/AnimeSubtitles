@@ -2,9 +2,9 @@ import json
 import logging
 import time
 # from typing import Dict, List
-# from utils.parsers import (
-#     download_subtitles,
-# )
+from utils.parsers import (
+    download_subtitles,
+)
 # from utils.helpers import (
 #     generate_ass_files,
 #     build_df_from_ass_files,
@@ -26,22 +26,25 @@ logging.basicConfig(
 start = time.time()
 page_count = 1
 page_limit = 99
-filter_anime = "Mashle"
+filter_anime = "Helck"
 desired_subs = DESIRED_SUBS
 test_file = True
-for page in range(1, page_count + 1):
-    data = build_json_with_links(
-        page=page,
-        limit_per_page=page_limit,
-        filter_anime=filter_anime,
-        desired_subs=desired_subs
-    )
-    page = "teste" if test_file else page
-    with open(f"examples/page_{page}.json", "w+", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
-end = time.time()
-logger.info(f"Finished in {round(end - start)}s")
-# anime_list = download_subtitles("examples/page_1.json")
+# for page in range(1, page_count + 1):
+#     data = build_json_with_links(
+#         page=page,
+#         limit_per_page=page_limit,
+#         filter_anime=filter_anime,
+#         desired_subs=desired_subs
+#     )
+#     page = "teste" if test_file else page
+#     with open(f"examples/page_{page}.json", "w+", encoding="utf-8") as f:
+#         json.dump(data, f, indent=4)
+# end = time.time()
+# logger.info(f"Finished getting links in {round(end - start)}s")
+anime_list = download_subtitles(
+    file_path="examples/page_1.json",
+    filter_anime=filter_anime
+)
 # for test_anime in anime_list[:1]:
 # test_anime = "Helck"
 # logger.info(f"---------- Processing anime: {test_anime} ----------")
