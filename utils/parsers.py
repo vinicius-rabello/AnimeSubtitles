@@ -79,6 +79,7 @@ def get_batch_options_and_episode_count(title: str, link: str) \
         if size_in_gb > 16.0:
             continue
 
+        # TODO: Maybe get the amount of links from provider on the page
         batch_obj = candidate.find("div", class_="link").find("a")
         provider = get_provider(batch_obj.text)
         if not provider or provider in fonts_set:
@@ -229,6 +230,10 @@ def get_all_subtitles_info(
     final_object = []
     already_obtained_links = set()
     total_to_gather = len(items)
+    if total_to_gather == 0:
+        logger.info(f"Anime {title} does not have subtitles available.")
+        return []
+
     logger.info(f"Gathering subtitle links for anime {title}...")
 
     for idx, item in enumerate(items):
@@ -248,7 +253,7 @@ def get_all_subtitles_info(
         final_object.append(item)
         already_obtained_links.add(sub_link)
 
-    return items
+    return final_object
 
 
 def get_subtitle_file(link: str) -> Optional[requests.Response]:
@@ -315,6 +320,11 @@ def download_subtitles(
         if filter_anime and filter_anime not in format_title_for_filter(anime):
             continue
         logger.info(f"---------- Processing anime {anime} ----------")
+        if not episodes:
+            # nothing to be done
+            logger.info("No links available for this anime. Skipping...")
+            continue
+
         error_count = 0
         result = create_folders_for_anime(anime_name=anime)
 
@@ -323,7 +333,7 @@ def download_subtitles(
                 f"Failed creating folders for anime {anime}. Skipping...")
             continue
 
-        anime = anime.replace(' ', '_')
+        anime = anime.replace(' ', '_').replace(":", "_")
         folder_path = f'data/{anime}/raw'
 
         logger.info("Downloading subtitles...")
@@ -358,6 +368,6 @@ def download_subtitles(
         logger.info(f"Finished downloading files for anime {anime}.")
         if error_count > 0:
             logger.info(
-                f"Failed {error_count} from a total of {len(episode)} files.")
+                f"Failed {error_count} from a total of {len(episodes)} files.")
 
     return anime_list

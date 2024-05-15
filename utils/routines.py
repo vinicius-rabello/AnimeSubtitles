@@ -11,8 +11,9 @@ from utils.helpers import (
     extract_titles_and_anime_links,
     filter_links_from_provider,
     sort_options_by_priority,
+    check_for_id,
 )
-from utils.constants import FORMAT, DESIRED_SUBS
+from utils.constants import FORMAT, DESIRED_SUBS, MEMBER_CUT
 
 logger = logging.getLogger(__name__)
 level = logging.INFO
@@ -94,7 +95,12 @@ def build_json_with_links(
             )
             continue
 
-        # TODO: check if anime is revelant by MAL id before continuing
+        is_relevant = check_for_id(mal_id=mal_id, members_cut=MEMBER_CUT)
+        if not is_relevant:
+            logger.info(
+                f"Anime {title} has less than {MEMBER_CUT} members. Ignoring..."
+            )
+            continue
 
         provider_selected = ""
         # sort provider_names by priority

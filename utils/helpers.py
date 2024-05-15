@@ -5,7 +5,7 @@ import lzma
 import re
 import os
 import pandas as pd
-from typing import Any, Dict, Literal, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 # from ass.line import Dialogue
 from bs4.element import Tag
 from .constants import (
@@ -14,6 +14,7 @@ from .constants import (
     PREFERENCE_RAWS,
     DESIRED_SUBS,
     FORMAT,
+    PATH_ID_MEMBER_MAP
 )
 
 # Setup logger
@@ -52,8 +53,17 @@ def get_provider(text: str) -> str:
     return provider
 
 
-def extract_titles_and_anime_links(animes: List[Tag], filter_anime: str = "") \
+def extract_titles_and_anime_links(
+    animes: List[Tag],
+    filter_anime: str = "",
+    filter_link: str = "") \
         -> Tuple[List[str], List[str]]:
+    # only bad case is providing both, so true and true
+    invalid = filter_anime and filter_link
+    if invalid:
+        raise ValueError(
+            "You can filter for either anime or link or neither, but not both."
+        )
     titles, links = [], []
     filter_anime = format_title_for_filter(filter_anime)
 
@@ -63,9 +73,19 @@ def extract_titles_and_anime_links(animes: List[Tag], filter_anime: str = "") \
         title_for_comparison = format_title_for_filter(title)
 
         if filter_anime:
-            if title_for_comparison == filter_anime:
+            # if we are filtering for a specific entry, skip the rest
+            # TODO: Better logic here (regex?)
+            if filter_anime in title_for_comparison:
                 links.append(link)
                 titles.append(title)
+                break
+            continue
+
+        elif filter_link:
+            if filter_link == link:
+                links.append(link)
+                titles.append(title)
+                break
             continue
 
         links.append(link)
@@ -201,7 +221,7 @@ def create_folders_for_anime(
     logger.info("Trying to create necessary folders...")
     completed = True
 
-    anime = anime_name.replace(' ', '_')
+    anime = anime_name.replace(' ', '_').replace(":", "_")
     path = f'data/{anime}'
     # check if folder for specific anime already exists
     if not os.path.exists(path):
@@ -225,9 +245,12 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
     created = []
     filter_anime = filter_anime.replace(" ", "_")
     animes = os.listdir('data')
+    if filter_anime:
+        logger.info(f"Searching only for anime {filter_anime}.")
     for anime in animes:
         # for testing purposes
         if filter_anime and anime.lower() != filter_anime.lower():
+            logger.info(f"Anime {anime} ignore due to filtering.")
             continue
 
         logger.info(f'Generating .ass files for anime: {anime}')
@@ -236,6 +259,14 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
         success = 0
         fails = 0
 
+        # check if already generated all .ass for this entry
+        proc_path = folder_path.replace("raw", "processed")
+        if os.path.exists(proc_path):
+            if len(os.listdir(proc_path)) >= len(episodes):
+                logger.info(f"Already generated .ass files for {anime}.")
+                continue
+
+        # TODO: make this better (having full name here is useless)
         for idx, episode in enumerate(episodes):
             path = folder_path + '/' + episode
             # read .xz file
@@ -246,6 +277,7 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
                 # removing .xz
                 path = path[:-3]
                 # we want to save .ass files into processed folder, not raw
+                # TODO: can be problematic if anime name contains "raw"
                 path = path.replace('raw', 'processed')
 
                 with open(path + '.ass', 'wb') as file:  # write content into .ass file
@@ -267,42 +299,57 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
     return created
 
 
+def process_episode_data(path: str, episode: int) -> Tuple[List[List[str]], int]:
+    data = []
+    no_character_name = 0
+
+    with open(path, encoding='utf_8_sig') as f:
+        doc = ass.parse(f)
+        # get every dialogue line
+        events = doc.events
+        logger.debug(f'Reading {path.split("/")[-1]}...')
+        for event in events:
+            # we do not care about signs
+            if event.style.lower() in "signs" or \
+                    event.name.lower() == "sign":
+                continue
+
+            # we will probably not have the character names
+            elif not event.name:
+                event.name = "Unknown"
+                no_character_name += 1
+
+            # save every line with whoever said the line
+            cleaned_text = clean_ass_text(event.text)
+
+            data.append([episode, event.name, cleaned_text])
+
+    return data, no_character_name
+
+
 def build_df_from_ass_files(
-    anime_name: str = "", logs: Literal["minimal", "debug"] = "minimal") \
-        -> pd.DataFrame:
+    anime_name: str = ""
+) -> pd.DataFrame:
     # this will not be viable for anime with large number of episodes
     # since dataframe will have lots of rows, thus running out of memory
     # let's change to chunks later
     no_character_name = 0
-    folder_path = 'data/' + anime_name.replace(" ", "_") + '/processed'
+    folder_path = 'data/' + anime_name + '/processed'
     # list of every .ass file in anime folder
     episodes = os.listdir(folder_path)
     table = []
     for episode in episodes:  # iterate over every episode
         path = folder_path + '/' + episode
         # get episode number (episode title is always anime_name_{episode_num}.ass)
-        episode_number = episode.split('.')[0].split('_')[-1]
+        episode_number = episode.split('.')[-2].split('_')[-1]
         try:
-            with open(path, encoding='utf_8_sig') as f:
-                doc = ass.parse(f)  # read .ass file
-                events = doc.events  # get every dialogue line
-                if logs == "debug":
-                    logger.debug(f'Reading {path.split("/")[-1]}...')
-                for event in events:
-                    # we do not care about signs
-                    if event.style.lower() == "signs" or \
-                            event.name.lower() == "sign":
-                        continue
-                    # we will probably not have the character names
-                    elif not event.name:
-                        event.name = "Unknown"
-                        no_character_name += 1
-                    # save every line with whoever said the line
-                    cleaned_text = clean_ass_text(event.text)
-                    table.append(
-                        [episode_number, event.name, cleaned_text])
+            episode_data, no_character = process_episode_data(
+                path, episode_number)
+            table += episode_data
+            no_character_name += no_character
         except Exception:
             logger.info(f'Error reading {path.split("/")[-1]}.')
+
     df = pd.DataFrame(
         table, columns=['Episode', 'Name', 'Quote'])
     df = df.astype({'Episode': 'float32'})
@@ -347,3 +394,12 @@ def process_data_input(file_path: Union[str, Dict[str, Any]]) -> Dict[str, Any]:
             f.close()
 
     return data
+
+
+def check_for_id(mal_id: int, members_cut: int) -> bool:
+    file = PATH_ID_MEMBER_MAP
+    data = ""
+    with open(file, "r+", encoding="utf-8") as f:
+        data = json.load(f)
+    members = data.get(str(mal_id), 0)
+    return int(members) > members_cut
