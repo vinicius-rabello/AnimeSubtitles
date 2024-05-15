@@ -24,6 +24,7 @@ from .helpers import (
     process_data_input,
     create_data_folder,
     format_title_for_filter,
+    find_episode_number,
 )
 
 # setup logger
@@ -238,8 +239,12 @@ def get_all_subtitles_info(
 
     for idx, item in enumerate(items):
         link_url = item.get("link_url", "")
+        link_title = item.get("link_title", "")
+
         sub_info, sub_link = get_subtitle_links(
             link_url, desired_subs=desired_subs)
+
+        episode_number = find_episode_number(link_title)
 
         if ((idx+1) % 10) == 0 or (idx + 1) == total_to_gather:
             logger.info(f"[Progress|Total]: [{idx+1}|{total_to_gather}]")
@@ -250,6 +255,7 @@ def get_all_subtitles_info(
 
         item["sub_link"] = sub_link
         item["sub_info"] = sub_info
+        item["episode_number"] = episode_number
         final_object.append(item)
         already_obtained_links.add(sub_link)
 

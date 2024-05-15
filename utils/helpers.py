@@ -11,10 +11,14 @@ from bs4.element import Tag
 from .constants import (
     SEQUENCE_REGEX,
     QUALITY_REGEX,
+    EPISODE_REGEX,
+    SEASON_REGEX,
+    REMOVE_DELIMITERS_REGEX,
     PREFERENCE_RAWS,
     DESIRED_SUBS,
     FORMAT,
-    PATH_ID_MEMBER_MAP
+    PATH_ID_MEMBER_MAP,
+    NOT_ALLOWED_CHARACTERS
 )
 
 # Setup logger
@@ -403,3 +407,38 @@ def check_for_id(mal_id: int, members_cut: int) -> bool:
         data = json.load(f)
     members = data.get(str(mal_id), 0)
     return int(members) > members_cut
+
+
+def remove_text_inside_delimiters(input_string: str) -> str:
+    # remove text inside de parenthesis or brackets
+    cleaned_string = re.sub(REMOVE_DELIMITERS_REGEX, '', input_string)
+    # clean extra spaces
+    return re.sub(r'\s{2,}', ' ', cleaned_string)
+
+
+def find_episode_number(input_string: str) -> str:
+    if not input_string:
+        return ""
+
+    text = remove_text_inside_delimiters(input_string)
+    # match any sequence of 2 to 4 numbers followed by space
+    regex = EPISODE_REGEX
+    matches = re.finditer(regex, text)
+    results = [(match.group(), match.start()) for match in matches]
+    number = ""
+    for res in results:
+        if text[res[1] - 1] in NOT_ALLOWED_CHARACTERS:
+            # the number is probably not an episode number
+            continue
+        else:
+            number = res[0]
+            break
+
+    return number
+
+
+def find_season(input_string: str) -> str:
+    regex = SEASON_REGEX
+    match = re.search(regex, input_string)
+    if match:
+        return match.group(1)
