@@ -25,7 +25,7 @@ logging.basicConfig(
 # Specify parameters
 start = time.time()
 page_count = 1
-page_limit = 5
+page_limit = 2
 filter_anime = ""
 desired_subs = DESIRED_SUBS
 test_file = True
@@ -44,18 +44,22 @@ for page in range(1, page_count + 1):
 end = time.time()
 logger.info(f"Finished getting links in {round(end - start)}s")
 
-# # downloading data from website and generating ass files
-# anime_list = download_subtitles(
-#     file_path="examples/page_1.json",
-#     filter_anime=filter_anime
-# )
-# created = generate_ass_files(filter_anime=filter_anime)
+# downloading data from website and generating ass files
+# TODO: rewrite whole file naming logic (rn we can lose data)
+# for example: since we do not include seasons, we may overwrite files
+# maybe go back to using enumerate and passing anime_list to rest of functions
+anime_list = download_subtitles(
+    file_path="examples/page_1.json",
+    filter_anime=filter_anime
+)
+# TODO: need to change file name logic (too long, not needed)
+created = generate_ass_files(filter_anime=filter_anime)
 
-# # writing data to db for each anime
-# for anime in anime_list:
-#     logger.info(f"---------- Processing anime: {anime} ----------")
-#     df = build_df_from_ass_files(anime_name=anime)
-#     con = sqlite_connector(db_name="testing_quotes")
-#     result = write_data(table_name=anime + "_quotes",
-#                         con=con, df=df, if_exists="replace")
-#     logger.info(f"Inserted {result} rows into database!")
+# writing data to db for each anime
+for anime, eps_list in anime_list.items():
+    logger.info(f"---------- Processing anime: {anime} ----------")
+    df = build_df_from_ass_files(anime_name=anime)
+    con = sqlite_connector(db_name="testing_quotes")
+    result = write_data(table_name=anime + "_quotes",
+                        con=con, df=df, if_exists="replace")
+    logger.info(f"Inserted {result} rows into database!")

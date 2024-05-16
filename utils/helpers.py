@@ -417,6 +417,7 @@ def remove_text_inside_delimiters(input_string: str) -> str:
 
 
 def find_episode_number(input_string: str) -> str:
+    # this method for episode seems to work fine for most cases
     if not input_string:
         return ""
 
@@ -434,11 +435,42 @@ def find_episode_number(input_string: str) -> str:
             number = res[0]
             break
 
+    # should not happen, but just to make sure
+    if "." in number:
+        # .5 episodes, ignore
+        number = ""
+
     return number
 
 
-def find_season(input_string: str) -> str:
+def find_season(input_string: str, provider: str) -> str:
+    if not input_string:
+        return ""
+    # try most common first. If not found, try more specifics
+    # first we try "SXYE", where X, Y are 0-9. Ex: "S01E10" should match
     regex = SEASON_REGEX
     match = re.search(regex, input_string)
     if match:
         return match.group(1)
+
+    # try same logic, but without need to have "E" after number
+    # "S3 bla bla" should match now
+    regex = r'S([0-9]{1,2})'
+    match = re.search(regex, input_string)
+    if match:
+        return match.group(1)
+
+    # the whole above logic can be one for loop, but this is better to explain
+
+    # try specifics for famous providers
+    match provider:
+        case "[Erai-raws]":
+            # try searching for word season
+            res = list(map(lambda x: x.lower(), input_string.split(" ")))
+            if "season" in res:
+                return res[res.index("season") + 1]
+        case _:
+            # can expand
+            return ""
+    # no luck
+    return ""

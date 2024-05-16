@@ -23,4 +23,4 @@ DESIRED_SUBS = "eng"
 MEMBER_CUT = 20000
 PATH_ID_MEMBER_MAP = "misc/mal_id_member_count.json"
 # this is for episode_number logic
-NOT_ALLOWED_CHARACTERS = ["x"]
+NOT_ALLOWED_CHARACTERS = ["x", "."]

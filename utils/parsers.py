@@ -25,6 +25,7 @@ from .helpers import (
     create_data_folder,
     format_title_for_filter,
     find_episode_number,
+    find_season,
 )
 
 # setup logger
@@ -226,6 +227,7 @@ def get_all_links_from_provider(provider: str, page: str, link: str) \
 def get_all_subtitles_info(
         title: str,
         items: List[Dict[str, str]],
+        provider_name: str,
         desired_subs: str = DESIRED_SUBS
 ) -> List[Dict[str, str]]:
     final_object = []
@@ -245,6 +247,7 @@ def get_all_subtitles_info(
             link_url, desired_subs=desired_subs)
 
         episode_number = find_episode_number(link_title)
+        season = find_season(link_title, provider_name)
 
         if ((idx+1) % 10) == 0 or (idx + 1) == total_to_gather:
             logger.info(f"[Progress|Total]: [{idx+1}|{total_to_gather}]")
@@ -256,6 +259,7 @@ def get_all_subtitles_info(
         item["sub_link"] = sub_link
         item["sub_info"] = sub_info
         item["episode_number"] = episode_number
+        item["season"] = season
         final_object.append(item)
         already_obtained_links.add(sub_link)
 
@@ -304,7 +308,7 @@ def download_subtitles(
     file_path: Union[str, Dict[str, List[Dict[str, str]]]],
     filter_anime: str = "",
     # logs: Literal["minimal", "debug"] = "minimal"
-) -> List[str]:
+) -> Dict[str, List[str]]:
     # verify data
     data = process_data_input(file_path)
 
@@ -318,15 +322,15 @@ def download_subtitles(
     except Exception as e:
         raise e
 
-    anime_list = []
+    anime_data = {}
     filter_anime = format_title_for_filter(filter_anime)
     # iterate over every anime on .json file
-    for anime, episodes in data.items():
+    for anime, entries in data.items():
         # target just entry/entries from filter
         if filter_anime and filter_anime not in format_title_for_filter(anime):
             continue
         logger.info(f"---------- Processing anime {anime} ----------")
-        if not episodes:
+        if not entries:
             # nothing to be done
             logger.info("No links available for this anime. Skipping...")
             continue
@@ -343,11 +347,20 @@ def download_subtitles(
         folder_path = f'data/{anime}/raw'
 
         logger.info("Downloading subtitles...")
-        for idx, episode in enumerate(episodes):
-            filename = anime + f'_{idx+1}.xz'
-            sub_link = episode.get("sub_link", "")
+        for idx, entry in enumerate(entries):
+            eps = []
+            episode = entry["episode_number"]
+            if not episode:
+                # we dont even know the ep number, no reason to save this
+                logger.debug(
+                    f"No episode number for entry {entry['link_title']}.")
+                continue
+
+            filename = anime + f'_{episode}.xz'
+            sub_link = entry.get("sub_link", "")
 
             if not sub_link:
+                # not sub link available
                 logger.debug(
                     f"Subtitle file for episode {episode} does not exists.")
                 continue
@@ -362,18 +375,19 @@ def download_subtitles(
                 )
                 if not completed:
                     error_count += 1
+                eps.append(episode)
 
             else:
                 logger.debug(f'{filename} is already downloaded')
                 continue
 
-            if ((idx+1) % 10) == 0 or (idx+1) == len(episodes):
-                logger.info(f"[Progress|Total]: [{idx+1}|{len(episodes)}]")
+            if ((idx+1) % 10) == 0 or (idx+1) == len(entries):
+                logger.info(f"[Progress|Total]: [{idx+1}|{len(entries)}]")
 
-        anime_list.append(anime)
+        anime_data[anime] = eps
         logger.info(f"Finished downloading files for anime {anime}.")
         if error_count > 0:
             logger.info(
-                f"Failed {error_count} from a total of {len(episodes)} files.")
+                f"Failed {error_count} from a total of {len(entries)} files.")
 
-    return anime_list
+    return anime_data

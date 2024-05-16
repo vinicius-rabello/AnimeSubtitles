@@ -27,17 +27,16 @@ from bs4 import BeautifulSoup
 import re
 
 
-def find_numbers(input_string):
-    # Regex para encontrar números conforme as condições especificadas
-    regex = r'[0-9]{2,4}(?=\s)'
-    matches = re.finditer(regex, input_string)
-    results = [(match.group(), match.start()) for match in matches]
-    return results
+# def find_numbers(input_string):
+#     # Regex para encontrar números conforme as condições especificadas
+#     regex = r'[0-9]{2,4}(?=\s)'
+#     matches = re.finditer(regex, input_string)
+#     results = [(match.group(), match.start()) for match in matches]
+#     return results
 
 
-s_teste = "[ToonsHub] The Vexations of a Shut-In Vampire Princess S01E05 1080p HIDIVE \
-WEB-DL AAC2.0 x264 (Dual-Audio, Multi-Subs)"
-result = find_numbers(s_teste)
-for res in result:
-    text, idx = res
-    print(text, s_teste[idx - 1])
+# s_teste = "[Erai-raws] Spy x Family Season 2 - 02 [1080p][Multiple Subtitle] \
+# [ENG][POR-BR][SPA-LA][SPA][ARA][FRE][GER][ITA][RUS]"
+# res = list(map(lambda x: x.lower(), s_teste.split(" ")))
+# if "season" in res:
+#     print(res[res.index("season") + 1])
