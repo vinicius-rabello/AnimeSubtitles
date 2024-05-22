@@ -45,21 +45,17 @@ end = time.time()
 logger.info(f"Finished getting links in {round(end - start)}s")
 
 # downloading data from website and generating ass files
-# TODO: rewrite whole file naming logic (rn we can lose data)
-# for example: since we do not include seasons, we may overwrite files
-# maybe go back to using enumerate and passing anime_list to rest of functions
-# anime_list = download_subtitles(
-#     file_path="examples/page_1.json",
-#     filter_anime=filter_anime
-# )
-# # TODO: need to change file name logic (too long, not needed)
-# created = generate_ass_files(filter_anime=filter_anime)
+file_path = "examples/page_1.json"
+anime_list = download_subtitles(
+    file_path=file_path,
+)
+created = generate_ass_files()
 
-# # writing data to db for each anime
-# for anime, eps_list in anime_list.items():
-#     logger.info(f"---------- Processing anime: {anime} ----------")
-#     df = build_df_from_ass_files(anime_name=anime)
-#     con = sqlite_connector(db_name="testing_quotes")
-#     result = write_data(table_name=anime + "_quotes",
-#                         con=con, df=df, if_exists="replace")
-#     logger.info(f"Inserted {result} rows into database!")
+# writing data to db for each anime
+for anime in created:
+    logger.info(f"---------- Processing anime: {anime} ----------")
+    df = build_df_from_ass_files(file_path=file_path, anime_name=anime)
+    con = sqlite_connector(db_name="testing_quotes")
+    result = write_data(table_name=anime + "_quotes",
+                        con=con, df=df, if_exists="replace")
+    logger.info(f"Inserted {result} rows into database!")

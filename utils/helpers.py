@@ -224,14 +224,17 @@ def create_folders_for_anime(
 
 def generate_ass_files(filter_anime: str = "") -> List[str]:
     created = []
-    filter_anime = filter_anime.replace(" ", "_")
+    filter_anime = remove_special_characters(
+        filter_anime).replace(" ", "_").lower()
     animes = os.listdir('data')
+
     if filter_anime:
         logger.info(f"Searching only for anime {filter_anime}.")
+
     for anime in animes:
         # for testing purposes
-        if filter_anime and anime.lower() != filter_anime.lower():
-            logger.info(f"Anime {anime} ignore due to filtering.")
+        if filter_anime and filter_anime not in anime:
+            logger.info(f"Anime {anime} ignored due to filtering.")
             continue
 
         logger.info(f'Generating .ass files for anime: {anime}')
@@ -244,11 +247,14 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
         proc_path = folder_path.replace("raw", "processed")
         if os.path.exists(proc_path):
             if len(os.listdir(proc_path)) >= len(episodes):
-                logger.info(f"Already generated .ass files for {anime}.")
+                logger.debug(f"Already generated .ass files for {anime}.")
                 continue
 
-        # TODO: make this better (having full name here is useless)
         for idx, episode in enumerate(episodes):
+
+            if ((idx + 1) % 10) == 0 or (idx + 1) == len(episodes):
+                logger.info(f"[Progress|Total]: [{idx+1}|{len(episodes)}]")
+
             path = folder_path + '/' + episode
             # read .xz file
             try:
@@ -258,29 +264,31 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
                 # removing .xz
                 path = path[:-3]
                 # we want to save .ass files into processed folder, not raw
-                # TODO: can be problematic if anime name contains "raw"
-                path = path.replace('raw', 'processed')
+                path = path.replace('/raw/', '/processed/')
 
                 with open(path + '.ass', 'wb') as file:  # write content into .ass file
                     file.write(content)
                     success += 1
+
             except Exception:
+                fails += 1
                 continue
-            # just to know that script is running
-            if ((idx + 1) % 10) == 0 or (idx + 1) == len(episodes):
-                logger.info(f"[Progress|Total]: [{idx+1}|{len(episodes)}]")
 
         if success > 0:
             created.append(anime)
             logger.info(
                 f'Successfully created {success} .ass files for anime {anime}!')
+
         if fails > 0:
             logger.warning(
                 f"Failed to create {fails} .ass files for anime {anime}.")
+
     return created
 
 
-def process_episode_data(path: str, episode: int) -> Tuple[List[List[str]], int]:
+def process_episode_data(
+        path: str, episode: int, mal_id: int
+) -> Tuple[List[List[str]], int]:
     data = []
     no_character_name = 0
 
@@ -303,37 +311,46 @@ def process_episode_data(path: str, episode: int) -> Tuple[List[List[str]], int]
             # save every line with whoever said the line
             cleaned_text = clean_ass_text(event.text)
 
-            data.append([episode, event.name, cleaned_text])
+            data.append([mal_id, episode, event.name, cleaned_text])
 
     return data, no_character_name
 
 
 def build_df_from_ass_files(
-    anime_name: str = ""
+    file_path: str,
+    anime_name: str
 ) -> pd.DataFrame:
-    # this will not be viable for anime with large number of episodes
-    # since dataframe will have lots of rows, thus running out of memory
-    # let's change to chunks later
+    data = process_data_input(file_path)
+
+    # nothing to be done
+    if not data:
+        return
+
     no_character_name = 0
     folder_path = 'data/' + anime_name + '/processed'
     # list of every .ass file in anime folder
     episodes = os.listdir(folder_path)
+    anime_info = data[anime_name]
+    mal_id = anime_info["metadata"]["mal_id"]
+
     table = []
-    for episode in episodes:  # iterate over every episode
+
+    for episode, entry in zip(episodes, anime_info["data"]):
         path = folder_path + '/' + episode
-        # get episode number (episode title is always anime_name_{episode_num}.ass)
-        episode_number = episode.split('.')[-2].split('_')[-1]
+        episode_number = entry["episode_number"]
+
         try:
             episode_data, no_character = process_episode_data(
-                path, episode_number)
+                path, episode_number, mal_id)
             table += episode_data
             no_character_name += no_character
+
         except Exception:
-            logger.info(f'Error reading {path.split("/")[-1]}.')
+            logger.info(f'Error reading {path}.')
 
     df = pd.DataFrame(
-        table, columns=['Episode', 'Name', 'Quote'])
-    df = df.astype({'Episode': 'int32'})
+        table, columns=['MAL_ID', 'EPISODE', 'NAME', 'QUOTE'])
+    df = df.astype({'MAL_ID': 'int32', 'EPISODE': 'int32'})
     logger.info(
         f"{len(df) - no_character_name}/{len(df)} quotes with character name.")
 

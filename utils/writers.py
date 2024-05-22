@@ -23,18 +23,19 @@ def write_data(
         return 0
 
     if clear_songs:
-        songs = df[(df["Name"] == "ED") | (df["Name"] == "OP")]
+        songs = df[(df["NAME"] == "ED") | (df["NAME"] == "OP")]
         if len(songs) > 0:
             # drop every row with op or ed
             df = df.drop(songs.index)
             # now just concat the unique texts from cleaned ops and eds
-            songs = songs.drop_duplicates(subset=["Name", "Quote"])
+            songs = songs.drop_duplicates(subset=["NAME", "QUOTE"])
             df = pd.concat([df, songs])
 
     logger.info(f"Preparing to write {len(df)} rows into dataframe...")
     try:
-        num_rows = df.to_sql(name=table_name, con=con,
-                             if_exists=if_exists, index=False)
+        num_rows = df.to_sql(
+            name=table_name, con=con, if_exists=if_exists, index=False
+        )
     except Exception as e:
         logger.error(str(e))
         num_rows = 0
