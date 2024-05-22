@@ -4,7 +4,7 @@ import os
 # import re
 import requests
 from time import sleep
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from .constants import (
@@ -26,6 +26,7 @@ from .helpers import (
     format_title_for_filter,
     find_episode_number,
     find_season,
+    remove_special_characters,
 )
 
 # setup logger
@@ -226,42 +227,62 @@ def get_all_links_from_provider(provider: str, page: str, link: str) \
 
 def get_all_subtitles_info(
         title: str,
-        items: List[Dict[str, str]],
+        anime_info: dict[str, Any],
         provider_name: str,
         desired_subs: str = DESIRED_SUBS
 ) -> List[Dict[str, str]]:
     final_object = []
     already_obtained_links = set()
-    total_to_gather = len(items)
+    already_obtained_episodes = set()
+    episode_count = anime_info["metadata"]["episode_count"]
+    total_to_gather = len(anime_info["data"])
+
     if total_to_gather == 0:
         logger.info(f"Anime {title} does not have subtitles available.")
         return []
 
     logger.info(f"Gathering subtitle links for anime {title}...")
 
-    for idx, item in enumerate(items):
+    for idx, item in enumerate(anime_info["data"]):
+
+        if ((idx+1) % 10) == 0 or (idx + 1) == total_to_gather:
+            logger.info(f"[Progress|Total]: [{idx+1}|{total_to_gather}]")
+
+        if len(final_object) == episode_count:
+            # we are done, maybe the rest are from other seasons (let's hope)
+            break
+
         link_url = item.get("link_url", "")
         link_title = item.get("link_title", "")
 
         sub_info, sub_link = get_subtitle_links(
             link_url, desired_subs=desired_subs)
 
-        episode_number = find_episode_number(link_title)
-        season = find_season(link_title, provider_name)
-
-        if ((idx+1) % 10) == 0 or (idx + 1) == total_to_gather:
-            logger.info(f"[Progress|Total]: [{idx+1}|{total_to_gather}]")
-
         # skip repeated episodes and episodes without subs
         if sub_link in already_obtained_links or not sub_link:
+            continue
+
+        episode_number = find_episode_number(link_title)
+        # season = find_season(link_title, provider_name)
+
+        if episode_number in already_obtained_episodes:
+            # maybe duplicate link
+            continue
+
+        if not episode_number:
+            # not worth it (may be .5 episodes or some alien format)
+            logger.debug(
+                f"Skipped episode {link_title} due to not finding ep number."
+            )
             continue
 
         item["sub_link"] = sub_link
         item["sub_info"] = sub_info
         item["episode_number"] = episode_number
-        item["season"] = season
+        # item["season"] = season
         final_object.append(item)
         already_obtained_links.add(sub_link)
+        already_obtained_episodes.add(episode_number)
 
     return final_object
 
@@ -307,7 +328,6 @@ def save_subtitle_file(
 def download_subtitles(
     file_path: Union[str, Dict[str, List[Dict[str, str]]]],
     filter_anime: str = "",
-    # logs: Literal["minimal", "debug"] = "minimal"
 ) -> Dict[str, List[str]]:
     # verify data
     data = process_data_input(file_path)
@@ -323,18 +343,20 @@ def download_subtitles(
         raise e
 
     anime_data = {}
-    filter_anime = format_title_for_filter(filter_anime)
+    filter_anime = remove_special_characters(filter_anime).lower()
     # iterate over every anime on .json file
-    for anime, entries in data.items():
+    for anime, entries in data.anime_info():
         # target just entry/entries from filter
-        if filter_anime and filter_anime not in format_title_for_filter(anime):
+        if filter_anime and filter_anime not in remove_special_characters(anime).lower():
             continue
+
         logger.info(f"---------- Processing anime {anime} ----------")
         if not entries:
             # nothing to be done
             logger.info("No links available for this anime. Skipping...")
             continue
 
+        anime = remove_special_characters(anime).replace(" ", "_")
         error_count = 0
         result = create_folders_for_anime(anime_name=anime)
 
@@ -343,7 +365,6 @@ def download_subtitles(
                 f"Failed creating folders for anime {anime}. Skipping...")
             continue
 
-        anime = anime.replace(' ', '_').replace(":", "_")
         folder_path = f'data/{anime}/raw'
 
         logger.info("Downloading subtitles...")

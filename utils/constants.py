@@ -18,7 +18,7 @@ EPISODE_REGEX = r'[0-9]{2,4}(?=\s)'
 SEASON_REGEX = r'S([0-9]{2})E'
 
 # PARSER configs
-PREFERENCE_RAWS = ["[SubsPlease]", "[Erai-raws]"]
+PREFERENCE_RAWS = ["[Erai-raws]", "[SubsPlease]"]
 DESIRED_SUBS = "eng"
 MEMBER_CUT = 20000
 PATH_ID_MEMBER_MAP = "misc/mal_id_member_count.json"

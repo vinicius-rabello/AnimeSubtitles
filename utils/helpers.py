@@ -59,37 +59,15 @@ def get_provider(text: str) -> str:
 
 def extract_titles_and_anime_links(
     animes: List[Tag],
-    filter_anime: str = "",
-    filter_link: str = "") \
-        -> Tuple[List[str], List[str]]:
-    # only bad case is providing both, so true and true
-    invalid = filter_anime and filter_link
-    if invalid:
-        raise ValueError(
-            "You can filter for either anime or link or neither, but not both."
-        )
+    filter_links: list[str],
+) -> Tuple[List[str], List[str]]:
     titles, links = [], []
-    filter_anime = format_title_for_filter(filter_anime)
 
     for entry in animes:
         link = entry.find('a').get('href')
         title = entry.find('strong').text
-        title_for_comparison = format_title_for_filter(title)
 
-        if filter_anime:
-            # if we are filtering for a specific entry, skip the rest
-            # TODO: Better logic here (regex?)
-            if filter_anime in title_for_comparison:
-                links.append(link)
-                titles.append(title)
-                break
-            continue
-
-        elif filter_link:
-            if filter_link == link:
-                links.append(link)
-                titles.append(title)
-                break
+        if filter_links and link not in filter_links:
             continue
 
         links.append(link)
@@ -225,8 +203,7 @@ def create_folders_for_anime(
     logger.info("Trying to create necessary folders...")
     completed = True
 
-    anime = anime_name.replace(' ', '_').replace(":", "_")
-    path = f'data/{anime}'
+    path = f'data/{anime_name}'
     # check if folder for specific anime already exists
     if not os.path.exists(path):
         try:
@@ -356,7 +333,7 @@ def build_df_from_ass_files(
 
     df = pd.DataFrame(
         table, columns=['Episode', 'Name', 'Quote'])
-    df = df.astype({'Episode': 'float32'})
+    df = df.astype({'Episode': 'int32'})
     logger.info(
         f"{len(df) - no_character_name}/{len(df)} quotes with character name.")
 
@@ -474,3 +451,9 @@ def find_season(input_string: str, provider: str) -> str:
             return ""
     # no luck
     return ""
+
+
+def remove_special_characters(input_string: str) -> str:
+    pattern = r'[\\\"\',.;:?-]'
+    clean_text = re.sub(pattern, '', input_string)
+    return clean_text

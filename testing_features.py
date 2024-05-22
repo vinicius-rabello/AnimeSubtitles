@@ -40,3 +40,12 @@ import re
 # res = list(map(lambda x: x.lower(), s_teste.split(" ")))
 # if "season" in res:
 #     print(res[res.index("season") + 1])
+def remove_special_characters(input_string: str) -> str:
+    pattern = r'[\\\"\',.;:?-]'
+    clean_text = re.sub(pattern, '', input_string)
+    print(clean_text)
+    return clean_text
+
+
+st = "\"Oshi no- Ko-\""
+remove_special_characters(st)
