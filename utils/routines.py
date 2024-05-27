@@ -79,6 +79,7 @@ def build_json_with_links(
     )
 
     if not titles or not links:
+        logger.info(f"Nothing to process on page {page}.")
         return dict()
 
     if limit_per_page < len(links):

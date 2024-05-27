@@ -1,6 +1,7 @@
 import json
 import logging
 import time
+import os
 # from typing import Dict, List
 from utils.parsers import (
     download_subtitles,
@@ -25,10 +26,9 @@ logging.basicConfig(
 # Specify parameters
 start = time.time()
 page_count = 1
-page_limit = 2
-filter_links = ["https://animetosho.org/series/oshi-no-ko.17449"]
+page_limit = 99
+filter_links = None
 desired_subs = DESIRED_SUBS
-test_file = True
 
 # getting links for subtitle files
 for page in range(1, page_count + 1):
@@ -52,6 +52,8 @@ anime_list = download_subtitles(
 created = generate_ass_files()
 
 # writing data to db for each anime
+if not created:
+    created = os.listdir("data")
 for anime in created:
     logger.info(f"---------- Processing anime: {anime} ----------")
     df = build_df_from_ass_files(file_path=file_path, anime_name=anime)

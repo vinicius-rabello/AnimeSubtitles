@@ -14,6 +14,7 @@ from .constants import (
     EPISODE_REGEX,
     SEASON_REGEX,
     REMOVE_DELIMITERS_REGEX,
+    BRACKETS_REGEX,
     PREFERENCE_RAWS,
     DESIRED_SUBS,
     FORMAT,
@@ -170,6 +171,9 @@ def filter_subs(
 
 
 def clean_ass_text(line: str) -> str:
+    """
+    Obsolete fn. Replaced by prepare_text_for_insertion
+    """
     # remove breakline
     line = line.replace("\\N", "")
 
@@ -309,7 +313,8 @@ def process_episode_data(
                 no_character_name += 1
 
             # save every line with whoever said the line
-            cleaned_text = clean_ass_text(event.text)
+            # also remove brackets and change \N to space
+            cleaned_text = prepare_text_for_insertion(event.text)
 
             data.append([mal_id, episode, event.name, cleaned_text])
 
@@ -473,4 +478,14 @@ def find_season(input_string: str, provider: str) -> str:
 def remove_special_characters(input_string: str) -> str:
     pattern = r'[\\\"\',.;:?-]'
     clean_text = re.sub(pattern, '', input_string)
+    return clean_text
+
+
+def prepare_text_for_insertion(input_string: str) -> str:
+    """
+    This is used before writing dataframe to database. This is the last processing step.
+    """
+    regex = BRACKETS_REGEX
+    clean_text = re.sub(regex, '', input_string)
+    clean_text = clean_text.replace("\\N", " ").replace("  ", " ")
     return clean_text

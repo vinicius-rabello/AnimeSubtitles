@@ -4,7 +4,7 @@ import json
 # import requests
 import os
 # import pandas as pd
-# import ass
+import ass
 import requests
 from bs4 import BeautifulSoup
 # from sqlalchemy import create_engine
@@ -25,7 +25,7 @@ from bs4 import BeautifulSoup
 # with open("mal_id_member_count.json", "w+", encoding="utf-8") as f:
 #     json.dump(data, f, indent=4)
 import re
-
+BRACKETS_REGEX = r'\{[^{}]*\}|\([^\[\]]*\)'
 
 # def find_numbers(input_string):
 #     # Regex para encontrar números conforme as condições especificadas
@@ -47,5 +47,23 @@ def remove_special_characters(input_string: str) -> str:
     return clean_text
 
 
+def prepare_text_for_insertion(input_string: str) -> str:
+    """
+    This is used before writing dataframe to database. This is the last processing step.
+    """
+    regex = BRACKETS_REGEX
+    clean_text = re.sub(regex, '', input_string)
+    clean_text = clean_text.replace("\\N", " ").replace("  ", " ")
+    return clean_text
+
+
 st = "\"Oshi no- Ko-\""
-remove_special_characters(st)
+# remove_special_characters(st)
+# with open("data/ore_dake_level_up_na_ken/processed/ep_01.ass", encoding='utf_8_sig') as f:
+#     doc = ass.parse(f)
+#     # get every dialogue line
+#     events = doc.events
+#     for i, event in enumerate(events):
+#         print(prepare_text_for_insertion(event.text))
+#         if i > 5:
+#             break
