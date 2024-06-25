@@ -1,0 +1,821 @@
+{
+    "fumetsu_no_anata_e": {
+        "data": [],
+        "metadata": {
+            "episode_count": 20,
+            "mal_id": 41025,
+            "original_name": "Fumetsu no Anata e"
+        }
+    },
+    "zombie_land_saga_revenge": {
+        "data": [],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 40174,
+            "original_name": "Zombie Land Saga Revenge"
+        }
+    },
+    "shinigami_bocchan_to_kuro_maid": {
+        "data": [
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 01 (720p) [1611931D].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-01-720p-1611931d-mkv.1573667",
+                "sub_link": "https://animetosho.org/storage/attach/00132082/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2001%20%28720p%29%20%5B1611931D%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "01"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 02 (540p) [0E3095A2].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-02-540p-0e3095a2-mkv.1575157",
+                "sub_link": "https://animetosho.org/storage/attach/001339af/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2002%20%28540p%29%20%5B0E3095A2%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "02"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 03 (540p) [E2A7A936].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-03-540p-e2a7a936-mkv.1576463",
+                "sub_link": "https://animetosho.org/storage/attach/001347dd/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2003%20%28540p%29%20%5BE2A7A936%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "03"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 04 (540p) [E0C24AF7].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-04-540p-e0c24af7-mkv.1577962",
+                "sub_link": "https://animetosho.org/storage/attach/0013573a/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2004%20%28540p%29%20%5BE0C24AF7%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "04"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 05 (540p) [88D68FD0].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-05-540p-88d68fd0-mkv.1580033",
+                "sub_link": "https://animetosho.org/storage/attach/00136eb4/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2005%20%28540p%29%20%5B88D68FD0%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "05"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 06 (540p) [5664807D].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-06-540p-5664807d-mkv.1581736",
+                "sub_link": "https://animetosho.org/storage/attach/00137f63/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2006%20%28540p%29%20%5B5664807D%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "06"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 07 (540p) [02FC4D04].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-07-540p-02fc4d04-mkv.1583720",
+                "sub_link": "https://animetosho.org/storage/attach/00139378/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2007%20%28540p%29%20%5B02FC4D04%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "07"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 08 (540p) [C35189A8].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-08-540p-c35189a8-mkv.1585546",
+                "sub_link": "https://animetosho.org/storage/attach/0013a483/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2008%20%28540p%29%20%5BC35189A8%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "08"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 09 (540p) [0D412101].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-09-540p-0d412101-mkv.1587576",
+                "sub_link": "https://animetosho.org/storage/attach/0013b7fb/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2009%20%28540p%29%20%5B0D412101%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "09"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 10 (540p) [1184609A].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-10-540p-1184609a-mkv.1589656",
+                "sub_link": "https://animetosho.org/storage/attach/0013c515/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2010%20%28540p%29%20%5B1184609A%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "10"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 11 (540p) [51BDB8A4].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-11-540p-51bdb8a4-mkv.1591212",
+                "sub_link": "https://animetosho.org/storage/attach/0013d38b/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2011%20%28540p%29%20%5B51BDB8A4%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "11"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 12 (540p) [3EB84CA6].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-12-540p-3eb84ca6-mkv.1593460",
+                "sub_link": "https://animetosho.org/storage/attach/0013e254/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2012%20%28540p%29%20%5B3EB84CA6%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "12"
+            }
+        ],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 47257,
+            "original_name": "Shinigami Bocchan to Kuro Maid"
+        }
+    },
+    "shinigami_bocchan_to_kuro_maid_(2023)": {
+        "data": [
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 13 (480p) [0C5EDBB2].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-13-480p-0c5edbb2-mkv.1782977",
+                "sub_link": "https://animetosho.org/storage/attach/001b2947/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2013%20%28480p%29%20%5B0C5EDBB2%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "13"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 14 (720p) [1A03E290].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-14-720p-1a03e290-mkv.1784881",
+                "sub_link": "https://animetosho.org/storage/attach/001b3adc/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2014%20%28720p%29%20%5B1A03E290%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "14"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 15 (480p) [5ABC8822].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-15-480p-5abc8822-mkv.1786634",
+                "sub_link": "https://animetosho.org/storage/attach/001b4d16/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2015%20%28480p%29%20%5B5ABC8822%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "15"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 16 (480p) [D634C21F].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-16-480p-d634c21f-mkv.1788797",
+                "sub_link": "https://animetosho.org/storage/attach/001b5d38/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2016%20%28480p%29%20%5BD634C21F%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "16"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 17 (1080p) [45FB61DC].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-17-1080p-45fb61dc-mkv.1791135",
+                "sub_link": "https://animetosho.org/storage/attach/001b6db9/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2017%20%281080p%29%20%5B45FB61DC%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "17"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 18 (1080p) [6FD88EE6].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-18-1080p-6fd88ee6-mkv.1793324",
+                "sub_link": "https://animetosho.org/storage/attach/001b7bf8/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2018%20%281080p%29%20%5B6FD88EE6%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "18"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 19 (480p) [16A24539].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-19-480p-16a24539-mkv.1795612",
+                "sub_link": "https://animetosho.org/storage/attach/001b8bf2/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2019%20%28480p%29%20%5B16A24539%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "19"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 20 (480p) [FC58517A].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-20-480p-fc58517a-mkv.1797635",
+                "sub_link": "https://animetosho.org/storage/attach/001ba46b/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2020%20%28480p%29%20%5BFC58517A%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "20"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 21 (1080p) [F80BB0C5].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-21-1080p-f80bb0c5-mkv.1799690",
+                "sub_link": "https://animetosho.org/storage/attach/001bbb21/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2021%20%281080p%29%20%5BF80BB0C5%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "21"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 22 (1080p) [DBE2B30E].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-22-1080p-dbe2b30e-mkv.1802016",
+                "sub_link": "https://animetosho.org/storage/attach/001bc7be/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2022%20%281080p%29%20%5BDBE2B30E%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "22"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 23 (1080p) [A0B33CD2].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-23-1080p-a0b33cd2-mkv.1804162",
+                "sub_link": "https://animetosho.org/storage/attach/001bd56e/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2023%20%281080p%29%20%5BA0B33CD2%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "23"
+            },
+            {
+                "link_title": "[SubsPlease] Shinigami Bocchan to Kuro Maid - 24 (480p) [4848D8DA].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-shinigami-bocchan-kuro-maid-24-480p-4848d8da-mkv.1806083",
+                "sub_link": "https://animetosho.org/storage/attach/001befdc/%5BSubsPlease%5D%20Shinigami%20Bocchan%20to%20Kuro%20Maid%20-%2024%20%28480p%29%20%5B4848D8DA%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "24"
+            }
+        ],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 49858,
+            "original_name": "Shinigami Bocchan to Kuro Maid (2023)"
+        }
+    },
+    "anima_yell!": {
+        "data": [
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 01 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-01-720p-multiple-subtitle-mkv.1268250",
+                "sub_link": "https://animetosho.org/storage/attach/0009adaa/%5BErai-raws%5D%20Anima%20Yell%21%20-%2001%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "01"
+            },
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 02 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-02-720p-multiple-subtitle-mkv.1270939",
+                "sub_link": "https://animetosho.org/storage/attach/0009b833/%5BErai-raws%5D%20Anima%20Yell%21%20-%2002%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "02"
+            },
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 03 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-03-720p-multiple-subtitle-mkv.1273387",
+                "sub_link": "https://animetosho.org/storage/attach/0009c942/%5BErai-raws%5D%20Anima%20Yell%21%20-%2003%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "03"
+            },
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 04 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-04-720p-multiple-subtitle-mkv.1276026",
+                "sub_link": "https://animetosho.org/storage/attach/0009d47b/%5BErai-raws%5D%20Anima%20Yell%21%20-%2004%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "04"
+            },
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 08 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-08-720p-multiple-subtitle-mkv.1286887",
+                "sub_link": "https://animetosho.org/storage/attach/000a0334/%5BErai-raws%5D%20Anima%20Yell%21%20-%2008%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "08"
+            },
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 09 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-09-720p-multiple-subtitle-mkv.1288963",
+                "sub_link": "https://animetosho.org/storage/attach/000a0c37/%5BErai-raws%5D%20Anima%20Yell%21%20-%2009%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "09"
+            },
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 10 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-10-720p-multiple-subtitle-mkv.1291367",
+                "sub_link": "https://animetosho.org/storage/attach/000a18c9/%5BErai-raws%5D%20Anima%20Yell%21%20-%2010%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "10"
+            },
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 11 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-11-720p-multiple-subtitle-mkv.1293487",
+                "sub_link": "https://animetosho.org/storage/attach/000a276b/%5BErai-raws%5D%20Anima%20Yell%21%20-%2011%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "11"
+            },
+            {
+                "link_title": "[Erai-raws] Anima Yell! - 12 [720p][Multiple Subtitle].mkv",
+                "link_url": "https://animetosho.org/view/erai-raws-anima-yell-12-720p-multiple-subtitle-mkv.1295790",
+                "sub_link": "https://animetosho.org/storage/attach/000a399f/%5BErai-raws%5D%20Anima%20Yell%21%20-%2012%20%5B720p%5D%5BMultiple%20Subtitle%5D_track3.eng.ass.xz",
+                "sub_info": "English(US) [eng, ASS]",
+                "episode_number": "12"
+            }
+        ],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 37206,
+            "original_name": "Anima Yell!"
+        }
+    },
+    "charlotte": {
+        "data": [
+            {
+                "link_title": "[FFF] Charlotte - 01 [1CDB9319].mkv",
+                "link_url": "https://animetosho.org/view/fff-charlotte-01-1cdb9319-mkv.913306",
+                "sub_link": "https://animetosho.org/storage/attach/00023e31/%5BFFF%5D%20Charlotte%20-%2001%20%5B1CDB9319%5D_track3.eng.ass.xz",
+                "sub_info": "FFF [eng, ASS]",
+                "episode_number": "01"
+            },
+            {
+                "link_title": "[FFF] Charlotte - 02 [9A3149B6].mkv",
+                "link_url": "https://animetosho.org/view/fff-charlotte-02-9a3149b6-mkv.916744",
+                "sub_link": "https://animetosho.org/storage/attach/00024bd8/%5BFFF%5D%20Charlotte%20-%2002%20%5B9A3149B6%5D_track3.eng.ass.xz",
+                "sub_info": "FFF [eng, ASS]",
+                "episode_number": "02"
+            }
+        ],
+        "metadata": {
+            "episode_count": 13,
+            "mal_id": 28999,
+            "original_name": "Charlotte"
+        }
+    },
+    "isekai_yakkyoku": {
+        "data": [
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 01 (480p) [ECD62A66].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-01-480p-ecd62a66-mkv.1672249",
+                "sub_link": "https://animetosho.org/storage/attach/0016cb89/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2001%20%28480p%29%20%5BECD62A66%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "01"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 02 (1080p) [C71DEF3D].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-02-1080p-c71def3d-mkv.1674664",
+                "sub_link": "https://animetosho.org/storage/attach/0016dda1/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2002%20%281080p%29%20%5BC71DEF3D%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "02"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 03 (720p) [5B1AC485].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-03-720p-5b1ac485-mkv.1677712",
+                "sub_link": "https://animetosho.org/storage/attach/0016ef05/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2003%20%28720p%29%20%5B5B1AC485%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "03"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 04 (480p) [14C3090D].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-04-480p-14c3090d-mkv.1680475",
+                "sub_link": "https://animetosho.org/storage/attach/00170c85/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2004%20%28480p%29%20%5B14C3090D%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "04"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 05 (1080p) [47ECC047].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-05-1080p-47ecc047-mkv.1682716",
+                "sub_link": "https://animetosho.org/storage/attach/001724eb/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2005%20%281080p%29%20%5B47ECC047%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "05"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 06 (480p) [7EA25CB2].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-06-480p-7ea25cb2-mkv.1684982",
+                "sub_link": "https://animetosho.org/storage/attach/001735d9/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2006%20%28480p%29%20%5B7EA25CB2%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "06"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 07 (720p) [84856A97].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-07-720p-84856a97-mkv.1687729",
+                "sub_link": "https://animetosho.org/storage/attach/00175086/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2007%20%28720p%29%20%5B84856A97%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "07"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 08 (480p) [821F56DE].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-08-480p-821f56de-mkv.1689869",
+                "sub_link": "https://animetosho.org/storage/attach/00176489/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2008%20%28480p%29%20%5B821F56DE%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "08"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 09 (480p) [886C0657].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-09-480p-886c0657-mkv.1692291",
+                "sub_link": "https://animetosho.org/storage/attach/00177f4f/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2009%20%28480p%29%20%5B886C0657%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "09"
+            },
+            {
+                "link_title": "[SubsPlease] Isekai Yakkyoku - 10 (480p) [AEE2A7F2].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-isekai-yakkyoku-10-480p-aee2a7f2-mkv.1695041",
+                "sub_link": "https://animetosho.org/storage/attach/00178f47/%5BSubsPlease%5D%20Isekai%20Yakkyoku%20-%2010%20%28480p%29%20%5BAEE2A7F2%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "10"
+            }
+        ],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 49438,
+            "original_name": "Isekai Yakkyoku"
+        }
+    },
+    "futari_wa_precure": {
+        "data": [
+            {
+                "link_title": "[Some-Stuffs] Futari wa Precure 04 (DVD 540p) [237A26D7] (The Two Of Us Are Precure/Pretty Cure)",
+                "link_url": "https://animetosho.org/view/stuffs-futari-wa-precure-04-dvd-540p-237a26d7.n1797361",
+                "sub_link": "https://animetosho.org/storage/attach/001df467/%5BSome-Stuffs%5D%20Futari%20wa%20Precure%2004%20%28DVD%20540p%29%20%5B237A26D7%5D_track3.eng.ass.xz",
+                "sub_info": "eng [ASS]",
+                "episode_number": "04"
+            }
+        ],
+        "metadata": {
+            "episode_count": 49,
+            "mal_id": 603,
+            "original_name": "Futari wa Precure"
+        }
+    },
+    "meikyuu_black_company": {
+        "data": [],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 42340,
+            "original_name": "Meikyuu Black Company"
+        }
+    },
+    "sabikui_bisco": {
+        "data": [],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 48414,
+            "original_name": "Sabikui Bisco"
+        }
+    },
+    "tsuki_ga_michibiku_isekai_douchuu": {
+        "data": [],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 43523,
+            "original_name": "Tsuki ga Michibiku Isekai Douchuu"
+        }
+    },
+    "kenja_no_deshi_o_nanoru_kenja": {
+        "data": [
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 01 (720p) [28DF8F70].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-01-720p.1623091",
+                "sub_link": "https://animetosho.org/storage/attach/0014e0a8/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2001%20%28720p%29%20%5B28DF8F70%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "01"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 02 (720p) [E2069DC2].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-02-720p.1624675",
+                "sub_link": "https://animetosho.org/storage/attach/0014f80e/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2002%20%28720p%29%20%5BE2069DC2%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "02"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 03 (540p) [4F4414C4].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-03-540p.1626588",
+                "sub_link": "https://animetosho.org/storage/attach/001508dd/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2003%20%28540p%29%20%5B4F4414C4%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "03"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 04 (1080p) [172F3EFB].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-04-1080p.1628338",
+                "sub_link": "https://animetosho.org/storage/attach/00151c68/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2004%20%281080p%29%20%5B172F3EFB%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "04"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 05 (540p) [B528CA2B].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-05-540p.1630567",
+                "sub_link": "https://animetosho.org/storage/attach/00152e37/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2005%20%28540p%29%20%5BB528CA2B%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "05"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 06 (540p) [2BB59AC3].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-06-540p.1632395",
+                "sub_link": "https://animetosho.org/storage/attach/00153c15/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2006%20%28540p%29%20%5B2BB59AC3%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "06"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 07 (540p) [031C0A4B].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-07-540p.1634099",
+                "sub_link": "https://animetosho.org/storage/attach/001548f7/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2007%20%28540p%29%20%5B031C0A4B%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "07"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 08 (540p) [444E3196].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-08-540p.1636000",
+                "sub_link": "https://animetosho.org/storage/attach/00155882/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2008%20%28540p%29%20%5B444E3196%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "08"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 09 (540p) [F11D740A].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-09-540p.1638215",
+                "sub_link": "https://animetosho.org/storage/attach/00156639/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2009%20%28540p%29%20%5BF11D740A%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "09"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 10 (540p) [BD51F2F4].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-10-540p.1640346",
+                "sub_link": "https://animetosho.org/storage/attach/00157a7d/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2010%20%28540p%29%20%5BBD51F2F4%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "10"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 11 (720p) [2B9FEE9E].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-11-720p.1642156",
+                "sub_link": "https://animetosho.org/storage/attach/00158e25/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2011%20%28720p%29%20%5B2B9FEE9E%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "11"
+            },
+            {
+                "link_title": "[SubsPlease] Kenja no Deshi wo Nanoru Kenja - 12 (540p) [23497516].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-kenja-no-deshi-wo-nanoru-12-540p.1643851",
+                "sub_link": "https://animetosho.org/storage/attach/0015a629/%5BSubsPlease%5D%20Kenja%20no%20Deshi%20wo%20Nanoru%20Kenja%20-%2012%20%28540p%29%20%5B23497516%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "12"
+            }
+        ],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 42072,
+            "original_name": "Kenja no Deshi o Nanoru Kenja"
+        }
+    },
+    "kyoukai_no_rinne_(2017)": {
+        "data": [],
+        "metadata": {
+            "episode_count": 25,
+            "mal_id": 34106,
+            "original_name": "Kyoukai no Rinne (2017)"
+        }
+    },
+    "high_school_fleet": {
+        "data": [
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 01 [1F8FD88C].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-01-1f8fd88c-mkv.979785",
+                "sub_link": "https://animetosho.org/storage/attach/00037a3a/%5BVivid-GJM%5D%20Haifuri%20-%2001%20%5B1F8FD88C%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "01"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 02 [AC1FE6DD].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-02-ac1fe6dd-mkv.981755",
+                "sub_link": "https://animetosho.org/storage/attach/00038740/%5BVivid-GJM%5D%20Haifuri%20-%2002%20%5BAC1FE6DD%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "02"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 03 [FF3C6F59].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-03-ff3c6f59-mkv.983536",
+                "sub_link": "https://animetosho.org/storage/attach/00038d7d/%5BVivid-GJM%5D%20Haifuri%20-%2003%20%5BFF3C6F59%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "03"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 04 [76B24384].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-04-76b24384-mkv.985632",
+                "sub_link": "https://animetosho.org/storage/attach/000396e2/%5BVivid-GJM%5D%20Haifuri%20-%2004%20%5B76B24384%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "04"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 05 [03E1494D].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-05-03e1494d-mkv.987538",
+                "sub_link": "https://animetosho.org/storage/attach/0003a474/%5BVivid-GJM%5D%20Haifuri%20-%2005%20%5B03E1494D%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "05"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 06 [45BA69E0].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-06-45ba69e0-mkv.989231",
+                "sub_link": "https://animetosho.org/storage/attach/0003adcc/%5BVivid-GJM%5D%20Haifuri%20-%2006%20%5B45BA69E0%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "06"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 07 [84CEB8AD].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-07-84ceb8ad-mkv.990662",
+                "sub_link": "https://animetosho.org/storage/attach/0003b5c4/%5BVivid-GJM%5D%20Haifuri%20-%2007%20%5B84CEB8AD%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "07"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 08 [BE5E4C19].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-08-be5e4c19-mkv.992323",
+                "sub_link": "https://animetosho.org/storage/attach/0003c238/%5BVivid-GJM%5D%20Haifuri%20-%2008%20%5BBE5E4C19%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "08"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 09 [6D9D7530].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-09-6d9d7530-mkv.993773",
+                "sub_link": "https://animetosho.org/storage/attach/0003cfb1/%5BVivid-GJM%5D%20Haifuri%20-%2009%20%5B6D9D7530%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "09"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 10 [006DB82F].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-10-006db82f-mkv.995853",
+                "sub_link": "https://animetosho.org/storage/attach/0003d8bf/%5BVivid-GJM%5D%20Haifuri%20-%2010%20%5B006DB82F%5D_track3.eng.ass.xz",
+                "sub_info": "English subtitles [eng, ASS]",
+                "episode_number": "10"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 11 [1C5A5107].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-11-1c5a5107-mkv.998415",
+                "sub_link": "https://animetosho.org/storage/attach/0003e558/%5BVivid-GJM%5D%20Haifuri%20-%2011%20%5B1C5A5107%5D_track3.eng.ass.xz",
+                "sub_info": "Honorifics [eng, ASS]",
+                "episode_number": "11"
+            },
+            {
+                "link_title": "[Vivid-GJM] Haifuri - 12 [8E73F0F9].mkv",
+                "link_url": "https://animetosho.org/view/vivid-gjm-haifuri-12-8e73f0f9-mkv.1000004",
+                "sub_link": "https://animetosho.org/storage/attach/0003ed77/%5BVivid-GJM%5D%20Haifuri%20-%2012%20%5B8E73F0F9%5D_track3.eng.ass.xz",
+                "sub_info": "Honorifics [eng, ASS]",
+                "episode_number": "12"
+            }
+        ],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 31500,
+            "original_name": "High School Fleet"
+        }
+    },
+    "yuru_camp_season_2": {
+        "data": [],
+        "metadata": {
+            "episode_count": 13,
+            "mal_id": 38474,
+            "original_name": "Yuru Camp Season 2"
+        }
+    },
+    "elfen_lied": {
+        "data": [],
+        "metadata": {
+            "episode_count": 13,
+            "mal_id": 226,
+            "original_name": "Elfen Lied"
+        }
+    },
+    "jigokuraku": {
+        "data": [
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 01 (1080p) [A13977A0].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-01-1080p-a13977a0-mkv.1755633",
+                "sub_link": "https://animetosho.org/storage/attach/001a0fd2/%5BSubsPlease%5D%20Jigokuraku%20-%2001%20%281080p%29%20%5BA13977A0%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "01"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 02 (1080p) [DB5005A3].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-02-1080p-db5005a3-mkv.1757568",
+                "sub_link": "https://animetosho.org/storage/attach/001a2282/%5BSubsPlease%5D%20Jigokuraku%20-%2002%20%281080p%29%20%5BDB5005A3%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "02"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 03 (1080p) [046727F7].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-03-1080p-046727f7-mkv.1759691",
+                "sub_link": "https://animetosho.org/storage/attach/001a347f/%5BSubsPlease%5D%20Jigokuraku%20-%2003%20%281080p%29%20%5B046727F7%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "03"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 04 (480p) [3F9E837B].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-04-480p-3f9e837b-mkv.1761883",
+                "sub_link": "https://animetosho.org/storage/attach/001a482a/%5BSubsPlease%5D%20Jigokuraku%20-%2004%20%28480p%29%20%5B3F9E837B%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "04"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 05 (480p) [130E6218].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-05-480p-130e6218-mkv.1763849",
+                "sub_link": "https://animetosho.org/storage/attach/001a5de0/%5BSubsPlease%5D%20Jigokuraku%20-%2005%20%28480p%29%20%5B130E6218%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "05"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 06 (1080p) [337BD048].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-06-1080p-337bd048-mkv.1765943",
+                "sub_link": "https://animetosho.org/storage/attach/001a7b09/%5BSubsPlease%5D%20Jigokuraku%20-%2006%20%281080p%29%20%5B337BD048%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "06"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 07 (720p) [196CAFB8].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-07-720p-196cafb8-mkv.1768471",
+                "sub_link": "https://animetosho.org/storage/attach/001a9a46/%5BSubsPlease%5D%20Jigokuraku%20-%2007%20%28720p%29%20%5B196CAFB8%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "07"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 08 (1080p) [0F3595CE].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-08-1080p-0f3595ce-mkv.1770554",
+                "sub_link": "https://animetosho.org/storage/attach/001aa936/%5BSubsPlease%5D%20Jigokuraku%20-%2008%20%281080p%29%20%5B0F3595CE%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "08"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 09 (1080p) [A3EB3FBF].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-09-1080p-a3eb3fbf-mkv.1774174",
+                "sub_link": "https://animetosho.org/storage/attach/001acd28/%5BSubsPlease%5D%20Jigokuraku%20-%2009%20%281080p%29%20%5BA3EB3FBF%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "09"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 10 (480p) [96B173AE].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-10-480p-96b173ae-mkv.n1681015",
+                "sub_link": "https://animetosho.org/storage/attach/001adc60/%5BSubsPlease%5D%20Jigokuraku%20-%2010%20%28480p%29%20%5B96B173AE%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "10"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 11 (480p) [750364D2].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-11-480p-750364d2-mkv.1777373",
+                "sub_link": "https://animetosho.org/storage/attach/001aeeb2/%5BSubsPlease%5D%20Jigokuraku%20-%2011%20%28480p%29%20%5B750364D2%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "11"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 12 (480p) [2ED009A3].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-12-480p-2ed009a3-mkv.1778949",
+                "sub_link": "https://animetosho.org/storage/attach/001b03ef/%5BSubsPlease%5D%20Jigokuraku%20-%2012%20%28480p%29%20%5B2ED009A3%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "12"
+            },
+            {
+                "link_title": "[SubsPlease] Jigokuraku - 13 (480p) [32F29FDF].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-jigokuraku-13-480p-32f29fdf-mkv.1780704",
+                "sub_link": "https://animetosho.org/storage/attach/001b177c/%5BSubsPlease%5D%20Jigokuraku%20-%2013%20%28480p%29%20%5B32F29FDF%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "13"
+            }
+        ],
+        "metadata": {
+            "episode_count": 13,
+            "mal_id": 46569,
+            "original_name": "Jigokuraku"
+        }
+    },
+    "bocchi_the_rock!": {
+        "data": [
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 01 (720p) [02E56A05].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-01-720p-02e56a05-mkv.1703659",
+                "sub_link": "https://animetosho.org/storage/attach/0017e631/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2001%20%28720p%29%20%5B02E56A05%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "01"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 02 (1080p) [CCDC182B].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-02-1080p-ccdc182b-mkv.1705975",
+                "sub_link": "https://animetosho.org/storage/attach/0017fc76/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2002%20%281080p%29%20%5BCCDC182B%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "02"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 03 (1080p) [1F17BE65].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-03-1080p-1f17be65-mkv.1708193",
+                "sub_link": "https://animetosho.org/storage/attach/00180ee7/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2003%20%281080p%29%20%5B1F17BE65%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "03"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 04 (480p) [3A3B9203].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-04-480p-3a3b9203-mkv.1710470",
+                "sub_link": "https://animetosho.org/storage/attach/00182f20/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2004%20%28480p%29%20%5B3A3B9203%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "04"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 05 (480p) [3BC74451].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-05-480p-3bc74451-mkv.1713048",
+                "sub_link": "https://animetosho.org/storage/attach/00184080/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2005%20%28480p%29%20%5B3BC74451%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "05"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 06 (480p) [5244C00C].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-06-480p-5244c00c-mkv.1715200",
+                "sub_link": "https://animetosho.org/storage/attach/0018579f/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2006%20%28480p%29%20%5B5244C00C%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "06"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 07 (480p) [F3029978].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-07-480p-f3029978-mkv.1719953",
+                "sub_link": "https://animetosho.org/storage/attach/00186556/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2007%20%28480p%29%20%5BF3029978%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "07"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 08 (480p) [4FD738A5].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-08-480p-4fd738a5-mkv.1718656",
+                "sub_link": "https://animetosho.org/storage/attach/001875b8/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2008%20%28480p%29%20%5B4FD738A5%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "08"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 09 (480p) [89182925].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-09-480p-89182925-mkv.1720172",
+                "sub_link": "https://animetosho.org/storage/attach/001889fd/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2009%20%28480p%29%20%5B89182925%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "09"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 10 (480p) [BC7DA963].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-10-480p-bc7da963-mkv.n1612241",
+                "sub_link": "https://animetosho.org/storage/attach/00189e8a/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2010%20%28480p%29%20%5BBC7DA963%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "10"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 11 (480p) [BAC77388].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-11-480p-bac77388-mkv.1724103",
+                "sub_link": "https://animetosho.org/storage/attach/0018ab0e/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2011%20%28480p%29%20%5BBAC77388%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "11"
+            },
+            {
+                "link_title": "[SubsPlease] Bocchi the Rock! - 12 (1080p) [CA5333CB].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-bocchi-rock-12-1080p-ca5333cb-mkv.1726054",
+                "sub_link": "https://animetosho.org/storage/attach/0018bbdb/%5BSubsPlease%5D%20Bocchi%20the%20Rock%21%20-%2012%20%281080p%29%20%5BCA5333CB%5D_track3.eng.ass.xz",
+                "sub_info": "English subs [eng, ASS]",
+                "episode_number": "12"
+            }
+        ],
+        "metadata": {
+            "episode_count": 12,
+            "mal_id": 47917,
+            "original_name": "Bocchi the Rock!"
+        }
+    }
+}
